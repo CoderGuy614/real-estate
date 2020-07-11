@@ -29,22 +29,6 @@ class Houses extends React.Component {
     },
   };
 
-  search = (e) => {
-    let target = e.target.value.toLowerCase();
-    let originalProperties = this.state.originalProperties;
-    let properties = originalProperties.filter((h) => {
-      return (
-        h.title.toLowerCase().includes(target) ||
-        h.city.toLowerCase().includes(target) ||
-        h.region.toLowerCase().includes(target)
-      );
-    });
-    this.setState({
-      properties,
-      originalProperties,
-    });
-  };
-
   houseHover = (id) => {
     let properties = this.state.properties;
     properties.map((h) => {
@@ -56,17 +40,23 @@ class Houses extends React.Component {
     this.setState({ properties });
   };
 
-  // bedroomSelect = (e) => {
-  //   let bedroomChoice = e.target.value;
-  //   let originalHouses = this.state.originalHouses;
-  //   let houses = originalHouses.filter((h) => {
-  //     return Number(h.bedrooms) >= Number(bedroomChoice);
-  //   });
-  //   this.setState({
-  //     houses: houses,
-  //     originalHouses: originalHouses,
-  //   });
-  // };
+  bedroomSelect = (e) => {
+    let bedroomChoice = e.target.value;
+    console.log(bedroomChoice);
+    let originalProperties = this.state.originalProperties;
+    let properties = originalProperties.filter((h) => {
+      return h.Bedrooms >= bedroomChoice;
+    });
+    if (bedroomChoice) {
+      this.setState({
+        properties,
+      });
+    } else {
+      this.setState({
+        properties: originalProperties,
+      });
+    }
+  };
 
   typeSelect = (e) => {
     let typeChoice = e.target.value;
@@ -103,27 +93,21 @@ class Houses extends React.Component {
     }
   };
 
-  // sortBy = (e) => {
-  //   let sortBy = e.target.value;
-  //   let originalHouses = this.state.originalHouses;
-  //   if (sortBy == "price") {
-  //     let houses = originalHouses.sort((a, b) => {
-  //       return a.price - b.price;
-  //     });
-  //     this.setState({
-  //       houses: houses,
-  //       originalHouses: originalHouses,
-  //     });
-  //   } else {
-  //     let houses = originalHouses.sort((a, b) => {
-  //       return b.rating - a.rating;
-  //     });
-  //     this.setState({
-  //       houses: houses,
-  //       originalHouses: originalHouses,
-  //     });
-  //   }
-  // };
+  search = (e) => {
+    let target = e.target.value.toLowerCase();
+    let originalProperties = this.state.originalProperties;
+    let properties = originalProperties.filter((h) => {
+      return (
+        h.Title.toLowerCase().includes(target) ||
+        h.Address.toLowerCase().includes(target)
+      );
+    });
+    this.setState({
+      properties,
+      originalProperties,
+    });
+  };
+
   componentDidMount() {
     axios
       .get(`${process.env.REACT_APP_API}/properties`)
@@ -157,6 +141,8 @@ class Houses extends React.Component {
           properties={this.state.properties}
           maxPrice={this.maxPrice}
           typeSelect={this.typeSelect}
+          bedroomSelect={this.bedroomSelect}
+          search={this.search}
         />
 
         <div className="grid map">

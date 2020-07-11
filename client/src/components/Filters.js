@@ -1,9 +1,16 @@
 import React from "react";
 
-const Filters = ({ properties, categories, maxPrice, typeSelect }) => {
+const Filters = ({
+  properties,
+  categories,
+  maxPrice,
+  typeSelect,
+  search,
+  bedroomSelect,
+}) => {
   return (
     <div className="filters">
-      <select onChange={() => console.log("bedroom select")}>
+      <select onChange={bedroomSelect}>
         {[...Array(6)].map((choice, i) => {
           return (
             <option key={i} value={i + 1}>
@@ -23,13 +30,9 @@ const Filters = ({ properties, categories, maxPrice, typeSelect }) => {
         })}
       </select>
       <input onChange={maxPrice} type="number" placeholder="max price" />
-      <select onChange={() => console.log("SORT BY")}>
-        <option value="price">Sort By</option>
-        <option value="price">Lowest Price</option>
-        <option value="rating">Highest Rating</option>
-      </select>
+
       <input
-        onChange={() => console.log("SEARCH BY")}
+        onChange={search}
         type="text"
         className="search"
         placeholder="Search..."
