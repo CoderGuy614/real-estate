@@ -192,7 +192,7 @@ class Houses extends React.Component {
         <div className="grid map">
           <div className="grid four large">
             {this.state.properties.map((property, index) => (
-              <Link key={index} to={`/properties/${property.id}`}>
+              <Link key={index} to={`/property/${property.id}`}>
                 <Thumbnail
                   property={property}
                   key={index}

@@ -14,43 +14,23 @@ import "../styles/nav.css";
 import "../styles/gallery.css";
 import "../styles/review.css";
 
-class House extends React.Component {
+class Property extends React.Component {
   state = {
-    house: {
-      images: [],
-      type: {
-        name: ""
-      },
-      host: {
-        name: "",
-        avatar: ""
-      },
-      amenities: [],
-      rating: 0
+    property: {
+      category: {},
     },
-    reviews: []
   };
   componentDidMount() {
     axios
-      .get(`${process.env.REACT_APP_API}/houses/${this.props.match.params.id}`)
-      .then(res => {
-        this.setState({
-          house: res.data
-        });
-      })
-      .catch(err => {
-        console.log({ err });
-      });
-    axios
       .get(
-        `${process.env.REACT_APP_API}/reviews/?house=${this.props.match.params.id}`
+        `${process.env.REACT_APP_API}/properties/${this.props.match.params.id}`
       )
-      .then(res => {
+      .then((res) => {
         this.setState({
-          reviews: res.data
+          property: res.data,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log({ err });
       });
   }
@@ -58,27 +38,25 @@ class House extends React.Component {
     return (
       <>
         <Nav />
-        <Gallery images={this.state.house.images} />
+        <Gallery photos={this.state.property.Photos} />
         <div className="grid medium">
           <div className="grid sidebar-right">
             <div className="content">
-              <h1>{this.state.house.title}</h1>
+              <h1>{this.state.property.title}</h1>
               <small>
                 <i className="fas fa-map-marker-alt"></i>
-                <span>
-                  {this.state.house.city}, {this.state.house.region}
-                </span>
+                <span>{this.state.property.Address}</span>
               </small>
               <div className="user">
                 <div
                   className="avatar"
                   style={{
-                    backgroundImage: `url('${this.state.house.host.avatar}')`
+                    backgroundImage: `url('https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png')`,
                   }}
                 ></div>
                 <div className="name">
-                  <small>Hosted by</small>
-                  <span>{this.state.house.host.name}</span>
+                  <small>Listed by: Realtor Name</small>
+                  {/* <span>{this.state.property.host.name}</span> */}
                 </div>
               </div>
               <div className="card specs">
@@ -86,53 +64,54 @@ class House extends React.Component {
                   <ul className="grid two">
                     <li>
                       <i className="fas fa-fw fa-home"></i>
-                      {this.state.house.type.name}
+                      {this.state.property.category.name}
                     </li>
-                    <li>
+                    {/* <li>
                       <i className="fas fa-fw fa-user-friends"></i>
-                      {this.state.house.guests} guests
-                    </li>
+                      {this.state.property.guests} guests
+                    </li> */}
                     <li>
                       <i className="fas fa-fw fa-bed"></i>
-                      {this.state.house.bedrooms} bedrooms
+                      {this.state.property.Bedrooms} bedrooms
                     </li>
                     <li>
                       <i className="fas fa-fw fa-bath"></i>
-                      {this.state.house.bathrooms} bathrooms
+                      {this.state.property.Bathrooms} bathrooms
                     </li>
                   </ul>
                 </div>
               </div>
-              <p>{this.state.house.description}</p>
+              <p>{this.state.property.description}</p>
               <h3>Amenities</h3>
               <div className="card specs">
                 <div className="content">
                   <ul className="grid two">
-                    {this.state.house.amenities.map((a, i) => {
+                    {/* {this.state.house.amenities.map((a, i) => {
                       return (
                         <li key={i}>
                           <i className={`fas fa-fw fa-${a.icon}`}></i>
                           {a.name}
                         </li>
                       );
-                    })}
+                    })} */}
+                    <li>Fireplace</li>
+                    <li>Patio</li>
+                    <li>Fenced Yard</li>
+                    <li>Appliances Included</li>
                   </ul>
                 </div>
               </div>
-              <Review reviews={this.state.reviews} />
+              {/* <Review reviews={this.state.reviews} /> */}
             </div>
             <div className="sidebar">
               <div className="card shadow">
                 <div className="content large">
-                  <h3>
-                    ${this.state.house.price}
-                    <small>per night</small>
-                  </h3>
-                  <small>
+                  <h3>${this.state.property.Price}</h3>
+                  {/* <small>
                     <StarRating rating={this.state.house.rating} />
                     <span>{this.state.reviews.length} Reviews</span>
-                  </small>
-                  <form className="small">
+                  </small> */}
+                  {/* <form className="small">
                     <div className="group">
                       <label>Guests</label>
                       <select>
@@ -150,7 +129,7 @@ class House extends React.Component {
                         Book this house
                       </button>
                     </div>
-                  </form>
+                  </form> */}
                 </div>
               </div>
             </div>
@@ -161,4 +140,4 @@ class House extends React.Component {
   }
 }
 
-export default House;
+export default Property;

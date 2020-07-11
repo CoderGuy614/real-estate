@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 export default class Gallery extends Component {
   state = {
-    selectedImage: this.props.images
+    selectedImage: this.props.photos,
   };
   componentWillReceiveProps(props) {
     this.setState({
-      selectedImage: props.images[0]
+      photos: props.photos,
+      selectedImage: props.photos[0].url,
     });
   }
   render() {
@@ -15,16 +16,21 @@ export default class Gallery extends Component {
         <div className="gallery">
           <div
             className="image-main"
-            style={{ backgroundImage: `url('${this.state.selectedImage}')` }}
+            style={{
+              backgroundImage: `url('${process.env.REACT_APP_API}${this.state.selectedImage}')`,
+            }}
           ></div>
           <div className="previews">
-            {this.props.images.map((image, i) => (
-              <div
-                className="preview"
-                key={i}
-                style={{ backgroundImage: `url('${image}')` }}
-              ></div>
-            ))}
+            {this.state.photos &&
+              this.state.photos.map((image, i) => (
+                <div
+                  className="preview"
+                  key={i}
+                  style={{
+                    backgroundImage: `url('${process.env.REACT_APP_API}${image.url}')`,
+                  }}
+                ></div>
+              ))}
           </div>
         </div>
       </>
