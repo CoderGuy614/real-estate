@@ -18,6 +18,7 @@ class Property extends React.Component {
   state = {
     property: {
       category: {},
+      realtor: {},
     },
   };
   componentDidMount() {
@@ -34,6 +35,18 @@ class Property extends React.Component {
         console.log({ err });
       });
   }
+
+  getAmenities = (object) => {
+    let amenities = [];
+    let values = ["Fireplace", "Patio", "Fence", "Pool"];
+    for (let key in object) {
+      if (values.includes(key) && object[key] === true) {
+        amenities.push(key);
+      }
+    }
+    return amenities;
+  };
+
   render() {
     return (
       <>
@@ -55,8 +68,7 @@ class Property extends React.Component {
                   }}
                 ></div>
                 <div className="name">
-                  <small>Listed by: Realtor Name</small>
-                  {/* <span>{this.state.property.host.name}</span> */}
+                  <small>Listed by: {this.state.property.realtor.Name}</small>
                 </div>
               </div>
               <div className="card specs">
@@ -86,18 +98,14 @@ class Property extends React.Component {
               <div className="card specs">
                 <div className="content">
                   <ul className="grid two">
-                    {/* {this.state.house.amenities.map((a, i) => {
+                    {this.getAmenities(this.state.property).map((a, i) => {
                       return (
                         <li key={i}>
-                          <i className={`fas fa-fw fa-${a.icon}`}></i>
-                          {a.name}
+                          {/* <i className={`fas fa-fw fa-${a.icon}`}></i> */}
+                          {a}
                         </li>
                       );
-                    })} */}
-                    <li>Fireplace</li>
-                    <li>Patio</li>
-                    <li>Fenced Yard</li>
-                    <li>Appliances Included</li>
+                    })}
                   </ul>
                 </div>
               </div>
@@ -105,8 +113,9 @@ class Property extends React.Component {
             </div>
             <div className="sidebar">
               <div className="card shadow">
+                <span className="asking-price">Asking Price:</span>
                 <div className="content large">
-                  <h3>${this.state.property.Price}</h3>
+                  <h3>${Number(this.state.property.Price).toLocaleString()}</h3>
                   {/* <small>
                     <StarRating rating={this.state.house.rating} />
                     <span>{this.state.reviews.length} Reviews</span>

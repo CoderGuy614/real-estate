@@ -295,3 +295,16 @@ form .rating {
 .filters .search input:focus {
   border-color: #00988f;
 }
+
+.asking-price {
+  margin: auto;
+  padding-top: 10px;
+}
+
+.brand-title {
+  font-size: 24px;
+  text-decoration: underline overline;
+}
+.logo {
+  height: 100px;
+}

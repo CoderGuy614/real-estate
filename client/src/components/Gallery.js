@@ -10,6 +10,7 @@ export default class Gallery extends Component {
       selectedImage: props.photos[0].url,
     });
   }
+
   render() {
     return (
       <>
