@@ -13,8 +13,8 @@ import Review from "./Review";
 
 class Houses extends React.Component {
   state = {
-    houses: [],
-    types: [],
+    properties: [],
+    categories: [],
     map: {
       key: {
         key: `${process.env.REACT_APP_MAP_KEY}`,
@@ -29,8 +29,8 @@ class Houses extends React.Component {
 
   search = (e) => {
     let target = e.target.value.toLowerCase();
-    let originalHouses = this.state.originalHouses;
-    let houses = originalHouses.filter((h) => {
+    let originalProperties = this.state.originalProperties;
+    let properties = originalProperties.filter((h) => {
       return (
         h.title.toLowerCase().includes(target) ||
         h.city.toLowerCase().includes(target) ||
@@ -38,119 +38,121 @@ class Houses extends React.Component {
       );
     });
     this.setState({
-      houses: houses,
-      originalHouses: originalHouses,
+      properties,
+      originalProperties,
     });
   };
 
   typeSelect = (e) => {
     let typeChoice = e.target.value;
-    let originalHouses = this.state.originalHouses;
+    let originalProperties = this.state.originalProperties;
     if (typeChoice == "all") {
       this.setState({
-        houses: originalHouses,
+        properties: originalProperties,
       });
     } else {
-      let houses = originalHouses.filter((h) => {
-        return h.type.name == typeChoice;
+      let properties = originalProperties.filter((h) => {
+        return h.category.name == typeChoice;
       });
       this.setState({
-        houses: houses,
-        originalHouses: originalHouses,
+        properties,
+        originalProperties,
       });
     }
   };
 
   houseHover = (id) => {
-    let houses = this.state.houses;
-    houses.map((h) => {
+    let properties = this.state.properties;
+    properties.map((h) => {
       h.selected = false;
       return h;
     });
-    let house = houses.find((h) => h._id == id);
-    house.selected = true;
-    this.setState({ houses });
+    let property = properties.find((h) => h.id == id);
+    property.selected = true;
+    this.setState({ properties });
   };
 
-  bedroomSelect = (e) => {
-    let bedroomChoice = e.target.value;
-    let originalHouses = this.state.originalHouses;
-    let houses = originalHouses.filter((h) => {
-      return Number(h.bedrooms) >= Number(bedroomChoice);
-    });
-    this.setState({
-      houses: houses,
-      originalHouses: originalHouses,
-    });
-  };
+  // bedroomSelect = (e) => {
+  //   let bedroomChoice = e.target.value;
+  //   let originalHouses = this.state.originalHouses;
+  //   let houses = originalHouses.filter((h) => {
+  //     return Number(h.bedrooms) >= Number(bedroomChoice);
+  //   });
+  //   this.setState({
+  //     houses: houses,
+  //     originalHouses: originalHouses,
+  //   });
+  // };
 
-  maxPrice = (e) => {
-    let originalHouses = this.state.originalHouses;
-    let maxPrice = e.target.value;
-    if (maxPrice) {
-      let houses = originalHouses.filter((h) => {
-        return h.price <= maxPrice;
-      });
-      this.setState({
-        houses: houses,
-        originalHouses: originalHouses,
-      });
-    } else {
-      this.setState({
-        houses: originalHouses,
-      });
-    }
-  };
-  sortBy = (e) => {
-    let sortBy = e.target.value;
-    let originalHouses = this.state.originalHouses;
-    if (sortBy == "price") {
-      let houses = originalHouses.sort((a, b) => {
-        return a.price - b.price;
-      });
-      this.setState({
-        houses: houses,
-        originalHouses: originalHouses,
-      });
-    } else {
-      let houses = originalHouses.sort((a, b) => {
-        return b.rating - a.rating;
-      });
-      this.setState({
-        houses: houses,
-        originalHouses: originalHouses,
-      });
-    }
-  };
+  // maxPrice = (e) => {
+  //   let originalHouses = this.state.originalHouses;
+  //   let maxPrice = e.target.value;
+  //   if (maxPrice) {
+  //     let houses = originalHouses.filter((h) => {
+  //       return h.price <= maxPrice;
+  //     });
+  //     this.setState({
+  //       houses: houses,
+  //       originalHouses: originalHouses,
+  //     });
+  //   } else {
+  //     this.setState({
+  //       houses: originalHouses,
+  //     });
+  //   }
+  // };
+  // sortBy = (e) => {
+  //   let sortBy = e.target.value;
+  //   let originalHouses = this.state.originalHouses;
+  //   if (sortBy == "price") {
+  //     let houses = originalHouses.sort((a, b) => {
+  //       return a.price - b.price;
+  //     });
+  //     this.setState({
+  //       houses: houses,
+  //       originalHouses: originalHouses,
+  //     });
+  //   } else {
+  //     let houses = originalHouses.sort((a, b) => {
+  //       return b.rating - a.rating;
+  //     });
+  //     this.setState({
+  //       houses: houses,
+  //       originalHouses: originalHouses,
+  //     });
+  //   }
+  // };
   componentDidMount() {
     axios
-      .get(`${process.env.REACT_APP_API}/houses`)
+      .get(`${process.env.REACT_APP_API}/properties`)
       .then((res) => {
         this.setState({
-          houses: res.data,
-          originalHouses: res.data,
+          properties: res.data,
+          originalProperties: res.data,
         });
       })
       .catch((err) => {
         console.log({ err });
       });
-    axios
-      .get(`${process.env.REACT_APP_API}/types`)
-      .then((res) => {
-        let typesArray = [];
-        res.data.map((type) => typesArray.push(type.name));
-        this.setState({
-          types: typesArray,
-        });
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .get(`${process.env.REACT_APP_API}/types`)
+    //   .then((res) => {
+    //     let typesArray = [];
+    //     res.data.map((type) => typesArray.push(type.name));
+    //     this.setState({
+    //       types: typesArray,
+    //     });
+    //   })
+    //   .catch((err) => console.log(err));
   }
   render() {
     return (
       <>
         <Nav />
+
+        {/* Filters Section */}
         <div className="filters">
-          <select onChange={this.bedroomSelect}>
+          <select onChange={() => console.log("bedroom select")}>
             {[...Array(6)].map((choice, i) => {
               return (
                 <option key={i} value={i + 1}>
@@ -159,12 +161,12 @@ class Houses extends React.Component {
               );
             })}
           </select>
-          <select onChange={this.typeSelect}>
+          <select onChange={() => console.log("Type Select")}>
             <option value="all">All Types</option>
-            {this.state.types.map((type, i) => {
+            {this.state.categories.map((category, i) => {
               return (
-                <option key={i} value={type}>
-                  {type}
+                <option key={i} value={category}>
+                  {category}
                 </option>
               );
             })}
@@ -174,24 +176,25 @@ class Houses extends React.Component {
             type="number"
             placeholder="max price"
           />
-          <select onChange={this.sortBy}>
+          <select onChange={() => console.log("SORT BY")}>
             <option value="price">Sort By</option>
             <option value="price">Lowest Price</option>
             <option value="rating">Highest Rating</option>
           </select>
           <input
-            onChange={this.search}
+            onChange={() => console.log("SEARCH BY")}
             type="text"
             className="search"
             placeholder="Search..."
           />
         </div>
+        {/* Map Section */}
         <div className="grid map">
           <div className="grid four large">
-            {this.state.houses.map((house, index) => (
-              <Link key={index} to={`/houses/${house._id}`}>
+            {this.state.properties.map((property, index) => (
+              <Link key={index} to={`/properties/${property.id}`}>
                 <Thumbnail
-                  house={house}
+                  property={property}
                   key={index}
                   houseHover={this.houseHover}
                 />
@@ -204,7 +207,7 @@ class Houses extends React.Component {
               center={this.state.map.center}
               zoom={this.state.map.zoom}
             >
-              {this.state.houses.map((h, i) => (
+              {this.state.properties.map((h, i) => (
                 <Pin house={h} lat={h.lat} lng={h.lng} key={i} />
               ))}
             </GoogleMap>

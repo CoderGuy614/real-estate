@@ -3,35 +3,39 @@ import StarRating from "./StarRating";
 
 class Thumbnail extends React.Component {
   state = {
-    house: this.props.house
+    property: this.props.property,
   };
   componentWillReceiveProps(props) {
-    this.setState({ house: props.house });
+    this.setState({ property: props.property });
   }
 
   render() {
+    const photoUrl = this.state.property.Photos[0].url;
+
     return (
       <a
         className="card link"
-        onMouseEnter={e => this.props.houseHover(this.state.house._id)}
+        onMouseEnter={(e) => this.props.houseHover(this.state.property.id)}
       >
         <div
           className="image"
-          style={{ backgroundImage: `url('${this.state.house.image}')` }}
+          style={{
+            backgroundImage: `url('${process.env.REACT_APP_API}${photoUrl}')`,
+          }}
         ></div>
         <div className="content">
           <small className="meta">
-            {this.state.house.type.name} • {this.state.house.bedrooms} Bedrooms
+            {this.state.property.category.name} • {this.state.property.Bedrooms}{" "}
+            Bedrooms
           </small>
-          <h2>{this.state.house.title}</h2>
+          <h2>{this.state.property.Title}</h2>
           <small className="location">
             <i className="fas fa-map-marker-alt"></i>
             <span>
-              {this.state.house.city}, {this.state.house.region}
+              {this.state.property.Title}, {this.state.property.Address}
             </span>
           </small>
-          <span className="price">${this.state.house.price}/night</span>
-          <StarRating rating={this.state.house.rating} />
+          <span className="price">${this.state.property.Price}</span>
         </div>
       </a>
     );

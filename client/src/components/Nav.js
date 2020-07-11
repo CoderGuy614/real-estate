@@ -8,7 +8,7 @@ export default class Nav extends Component {
         <a href="/" className="logo"></a>
         <div className="profile">
           <a href="/plus" className="button">
-            <span>Airbnb Plus</span>
+            CONTACT US
           </a>
         </div>
       </nav>
