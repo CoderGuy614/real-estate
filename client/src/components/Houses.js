@@ -9,10 +9,12 @@ import "../styles/nav.css";
 import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
 import Nav from "./Nav";
+import Filters from "./Filters";
 import Review from "./Review";
 
 class Houses extends React.Component {
   state = {
+    originalProperties: [],
     properties: [],
     categories: [],
     map: {
@@ -43,24 +45,6 @@ class Houses extends React.Component {
     });
   };
 
-  typeSelect = (e) => {
-    let typeChoice = e.target.value;
-    let originalProperties = this.state.originalProperties;
-    if (typeChoice == "all") {
-      this.setState({
-        properties: originalProperties,
-      });
-    } else {
-      let properties = originalProperties.filter((h) => {
-        return h.category.name == typeChoice;
-      });
-      this.setState({
-        properties,
-        originalProperties,
-      });
-    }
-  };
-
   houseHover = (id) => {
     let properties = this.state.properties;
     properties.map((h) => {
@@ -84,23 +68,41 @@ class Houses extends React.Component {
   //   });
   // };
 
-  // maxPrice = (e) => {
-  //   let originalHouses = this.state.originalHouses;
-  //   let maxPrice = e.target.value;
-  //   if (maxPrice) {
-  //     let houses = originalHouses.filter((h) => {
-  //       return h.price <= maxPrice;
-  //     });
-  //     this.setState({
-  //       houses: houses,
-  //       originalHouses: originalHouses,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       houses: originalHouses,
-  //     });
-  //   }
-  // };
+  typeSelect = (e) => {
+    let typeChoice = e.target.value;
+    let originalProperties = this.state.originalProperties;
+    if (typeChoice == "all") {
+      this.setState({
+        properties: originalProperties,
+      });
+    } else {
+      let properties = originalProperties.filter((h) => {
+        return h.category.name == typeChoice;
+      });
+      this.setState({
+        properties,
+      });
+    }
+  };
+
+  maxPrice = (e) => {
+    let originalProperties = this.state.originalProperties;
+    let maxPrice = e.target.value;
+    console.log(maxPrice);
+    if (maxPrice) {
+      let properties = originalProperties.filter((h) => {
+        return Number(h.Price) <= maxPrice;
+      });
+      this.setState({
+        properties,
+      });
+    } else {
+      this.setState({
+        properties: originalProperties,
+      });
+    }
+  };
+
   // sortBy = (e) => {
   //   let sortBy = e.target.value;
   //   let originalHouses = this.state.originalHouses;
@@ -134,61 +136,29 @@ class Houses extends React.Component {
       .catch((err) => {
         console.log({ err });
       });
-    // axios
-    //   .get(`${process.env.REACT_APP_API}/types`)
-    //   .then((res) => {
-    //     let typesArray = [];
-    //     res.data.map((type) => typesArray.push(type.name));
-    //     this.setState({
-    //       types: typesArray,
-    //     });
-    //   })
-    //   .catch((err) => console.log(err));
+    axios
+      .get(`${process.env.REACT_APP_API}/categories`)
+      .then((res) => {
+        let catArray = [];
+        res.data.map((cat) => catArray.push(cat.name));
+        this.setState({
+          categories: catArray,
+        });
+      })
+      .catch((err) => console.log(err));
   }
   render() {
     return (
       <>
         <Nav />
 
-        {/* Filters Section */}
-        <div className="filters">
-          <select onChange={() => console.log("bedroom select")}>
-            {[...Array(6)].map((choice, i) => {
-              return (
-                <option key={i} value={i + 1}>
-                  Min Bedrooms: {i + 1}{" "}
-                </option>
-              );
-            })}
-          </select>
-          <select onChange={() => console.log("Type Select")}>
-            <option value="all">All Types</option>
-            {this.state.categories.map((category, i) => {
-              return (
-                <option key={i} value={category}>
-                  {category}
-                </option>
-              );
-            })}
-          </select>
-          <input
-            onChange={this.maxPrice}
-            type="number"
-            placeholder="max price"
-          />
-          <select onChange={() => console.log("SORT BY")}>
-            <option value="price">Sort By</option>
-            <option value="price">Lowest Price</option>
-            <option value="rating">Highest Rating</option>
-          </select>
-          <input
-            onChange={() => console.log("SEARCH BY")}
-            type="text"
-            className="search"
-            placeholder="Search..."
-          />
-        </div>
-        {/* Map Section */}
+        <Filters
+          categories={this.state.categories}
+          properties={this.state.properties}
+          maxPrice={this.maxPrice}
+          typeSelect={this.typeSelect}
+        />
+
         <div className="grid map">
           <div className="grid four large">
             {this.state.properties.map((property, index) => (
