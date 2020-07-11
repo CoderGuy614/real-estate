@@ -20,8 +20,8 @@ class Houses extends React.Component {
         key: `${process.env.REACT_APP_MAP_KEY}`,
       },
       center: {
-        lat: -8.652,
-        lng: 115.137,
+        lat: 33.77596,
+        lng: -84.48497,
       },
       zoom: 14,
     },
