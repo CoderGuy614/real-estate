@@ -26,14 +26,12 @@ class Thumbnail extends React.Component {
         <div className="content">
           <small className="meta">
             {this.state.property.category.name} • {this.state.property.Bedrooms}{" "}
-            Bedrooms
+            Bedrooms • {this.state.property.Bathrooms} Bathrooms
           </small>
           <h2>{this.state.property.Title}</h2>
           <small className="location">
             <i className="fas fa-map-marker-alt"></i>
-            <span>
-              {this.state.property.Title}, {this.state.property.Address}
-            </span>
+            <span>{this.state.property.Address}</span>
           </small>
           <span className="price">${this.state.property.Price}</span>
         </div>

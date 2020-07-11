@@ -44,3 +44,7 @@ nav .profile .avatar {
 nav .profile a span {
   vertical-align: middle;
 }
+
+nav .brand-title {
+  float: left;
+}

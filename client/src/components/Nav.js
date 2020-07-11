@@ -7,6 +7,9 @@ export default class Nav extends Component {
       <nav>
         <a href="/" className="logo"></a>
         <div className="profile">
+          <span className="brand-title">
+            Hummell and Long Real Estate Professionals{" "}
+          </span>
           <a href="/plus" className="button">
             CONTACT US
           </a>

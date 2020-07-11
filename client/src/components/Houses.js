@@ -208,7 +208,7 @@ class Houses extends React.Component {
               zoom={this.state.map.zoom}
             >
               {this.state.properties.map((h, i) => (
-                <Pin house={h} lat={h.lat} lng={h.lng} key={i} />
+                <Pin property={h} lat={h.lat} lng={h.lng} key={i} />
               ))}
             </GoogleMap>
           </div>
