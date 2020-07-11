@@ -1,0 +1,13 @@
+.review {
+	margin-bottom: 20px;
+}
+
+.review p {
+	margin-bottom: 0;
+}
+
+.review .rating {
+	position: absolute;
+	top: 15px;
+	right: 20px;
+}

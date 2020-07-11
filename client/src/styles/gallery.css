@@ -1,0 +1,58 @@
+.gallery {
+  display: grid;
+  border-bottom: 1px solid #e2e2e2;
+  grid-template-columns: 1fr 1fr;
+}
+
+.gallery .image-main {
+  height: 500px;
+  background-color: #969696;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.gallery .image-main button {
+  height: 30px;
+}
+
+.gallery .image-main .icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 30px;
+  line-height: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.gallery .image-main .icon i {
+  color: white;
+}
+
+.gallery .previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  padding: 50px;
+}
+
+.gallery .preview {
+  height: 100px;
+  background-color: #969696;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.gallery .preview:hover,
+.gallery .preview.selected {
+  opacity: 0.5;
+}
