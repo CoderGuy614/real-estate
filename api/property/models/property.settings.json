@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "properties",
+  "info": {
+    "name": "property"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Address": {
+      "type": "string"
+    },
+    "Bedrooms": {
+      "type": "integer"
+    },
+    "Bathrooms": {
+      "type": "integer"
+    },
+    "SquareFeet": {
+      "type": "integer"
+    },
+    "Price": {
+      "type": "biginteger"
+    },
+    "Listed": {
+      "type": "date"
+    },
+    "Photos": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "category": {
+      "model": "category"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "available",
+        "under_contract",
+        "sold"
+      ]
+    }
+  }
+}
