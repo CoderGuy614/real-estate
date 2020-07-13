@@ -7,6 +7,7 @@ const Filters = ({
   typeSelect,
   search,
   bedroomSelect,
+  filter,
 }) => {
   return (
     <div className="filters">
@@ -31,12 +32,13 @@ const Filters = ({
       </select>
       <input onChange={maxPrice} type="number" placeholder="max price" />
 
-      <input
+      {/* <input
         onChange={search}
         type="text"
         className="search"
         placeholder="Search..."
-      />
+      /> */}
+      <button onClick={filter}>FILTER</button>
     </div>
   );
 };

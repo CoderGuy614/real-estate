@@ -27,6 +27,44 @@ class Houses extends React.Component {
       },
       zoom: 14,
     },
+    filterValues: {
+      bedrooms: 0,
+      category: null,
+      maxPrice: 1000000000000000,
+    },
+  };
+
+  filter = () => {
+    const { filterValues, originalProperties } = this.state;
+    let result = [];
+
+    result = originalProperties.filter((h) => {
+      console.log(h.maxPrice, filterValues.maxPrice);
+      return (
+        h.Bedrooms >= filterValues.bedrooms && h.Price <= filterValues.maxPrice
+      );
+    });
+
+    // if (filterValues.bedrooms) {
+    //   console.log("BEDROOM CHANGE");
+    //   result = result.filter((h) => {
+    //     return h.Bedrooms >= filterValues.bedrooms;
+    //   });
+    // }
+
+    // if (filterValues.category) {
+    //   result = result.filter((h) => {
+    //     return h.category.name == filterValues.category;
+    //   });
+    // }
+
+    // if (filterValues.maxPrice) {
+    //   result = result.filter((h) => {
+    //     return h.Price <= filterValues.maxPrice;
+    //   });
+    // }
+    console.log(result);
+    this.setState({ properties: result });
   };
 
   houseHover = (id) => {
@@ -42,55 +80,70 @@ class Houses extends React.Component {
 
   bedroomSelect = (e) => {
     let bedroomChoice = e.target.value;
-    console.log(bedroomChoice);
-    let originalProperties = this.state.originalProperties;
-    let properties = originalProperties.filter((h) => {
-      return h.Bedrooms >= bedroomChoice;
-    });
-    if (bedroomChoice) {
-      this.setState({
-        properties,
-      });
-    } else {
-      this.setState({
-        properties: originalProperties,
-      });
-    }
+    let filterValues = {
+      ...this.state.filterValues,
+      bedrooms: Number(e.target.value),
+    };
+    console.log(filterValues);
+    this.setState({ ...this.state, filterValues });
+
+    // console.log(bedroomChoice);
+    // let originalProperties = this.state.originalProperties;
+    // let properties = originalProperties.filter((h) => {
+    //   return h.Bedrooms >= bedroomChoice;
+    // });
+    // if (bedroomChoice) {
+    //   this.setState({
+    //     properties,
+    //   });
+    // } else {
+    //   this.setState({
+    //     properties: originalProperties,
+    //   });
+    // }
   };
 
   typeSelect = (e) => {
     let typeChoice = e.target.value;
-    let originalProperties = this.state.originalProperties;
-    if (typeChoice == "all") {
-      this.setState({
-        properties: originalProperties,
-      });
-    } else {
-      let properties = originalProperties.filter((h) => {
-        return h.category.name == typeChoice;
-      });
-      this.setState({
-        properties,
-      });
-    }
+    let filterValues = { ...this.state.filterValues, category: e.target.value };
+    this.setState({ ...this.state, filterValues });
+
+    // let originalProperties = this.state.originalProperties;
+    // if (typeChoice == "all") {
+    //   this.setState({
+    //     properties: originalProperties,
+    //   });
+    // } else {
+    //   let properties = originalProperties.filter((h) => {
+    //     return h.category.name == typeChoice;
+    //   });
+    //   this.setState({
+    //     properties,
+    //   });
+    // }
   };
 
   maxPrice = (e) => {
-    let originalProperties = this.state.originalProperties;
-    let maxPrice = e.target.value;
-    console.log(maxPrice);
-    if (maxPrice) {
-      let properties = originalProperties.filter((h) => {
-        return Number(h.Price) <= maxPrice;
-      });
-      this.setState({
-        properties,
-      });
-    } else {
-      this.setState({
-        properties: originalProperties,
-      });
-    }
+    let filterValues = {
+      ...this.state.filterValues,
+      maxPrice: Number(e.target.value),
+    };
+    this.setState({ ...this.state, filterValues });
+
+    // let originalProperties = this.state.originalProperties;
+    // console.log(maxPrice);
+    // if (maxPrice) {
+    //   let properties = originalProperties.filter((h) => {
+    //     return Number(h.Price) <= maxPrice;
+    //   });
+    //   this.setState({
+    //     properties,
+    //   });
+    // } else {
+    //   this.setState({
+    //     properties: originalProperties,
+    //   });
+    // }
   };
 
   search = (e) => {
@@ -143,6 +196,7 @@ class Houses extends React.Component {
           typeSelect={this.typeSelect}
           bedroomSelect={this.bedroomSelect}
           search={this.search}
+          filter={this.filter}
         />
 
         <div className="grid map">
