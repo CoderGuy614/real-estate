@@ -31,14 +31,13 @@ const Filters = ({
         })}
       </select>
       <input onChange={maxPrice} type="number" placeholder="max price" />
-
       {/* <input
         onChange={search}
         type="text"
         className="search"
         placeholder="Search..."
       /> */}
-      <button onClick={filter}>FILTER</button>
+      <button onClick={filter}>Apply Filters</button>
     </div>
   );
 };
