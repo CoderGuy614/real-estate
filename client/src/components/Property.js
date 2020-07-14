@@ -4,7 +4,7 @@ import axios from "axios";
 import Nav from "./Nav";
 import Gallery from "./Gallery";
 import GoogleMap from "google-map-react";
-import Pin2 from "./Pin2";
+import Pin from "./Pin";
 
 import "../styles/cards.css";
 import "../styles/grid.css";
@@ -62,7 +62,6 @@ class Property extends React.Component {
     const { property, map } = this.state;
     return (
       <>
-        <Nav />
         <Gallery photos={property.Photos} />
         <div className="grid medium">
           <div className="grid sidebar-right">
@@ -127,7 +126,7 @@ class Property extends React.Component {
                   center={map.center}
                   zoom={map.zoom}
                 >
-                  <Pin2
+                  <Pin
                     property={property}
                     lat={property.lat}
                     lng={property.lng}

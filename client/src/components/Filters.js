@@ -1,11 +1,9 @@
 import React from "react";
 
 const Filters = ({
-  properties,
   categories,
   maxPrice,
   typeSelect,
-  search,
   bedroomSelect,
   filter,
 }) => {
@@ -31,12 +29,6 @@ const Filters = ({
         })}
       </select>
       <input onChange={maxPrice} type="number" placeholder="max price" />
-      {/* <input
-        onChange={search}
-        type="text"
-        className="search"
-        placeholder="Search..."
-      /> */}
       <button onClick={filter}>Apply Filters</button>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../styles/nav.css";
 
 export default class Nav extends Component {
@@ -12,9 +13,10 @@ export default class Nav extends Component {
               <strong>Hummell and Long Real Estate Professionals</strong>
             </em>
           </span>
-          <a href="/plus" className="button">
+          <Link to="/contact" className="button">
+            {" "}
             CONTACT US
-          </a>
+          </Link>
         </div>
       </nav>
     );

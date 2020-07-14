@@ -2,14 +2,14 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import GoogleMap from "google-map-react";
+import Thumbnail from "./Thumbnail";
+import Pin from "./Pin";
+import Filters from "./Filters";
+
 import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/maps.css";
 import "../styles/nav.css";
-import Thumbnail from "./Thumbnail";
-import Pin2 from "./Pin2";
-import Nav from "./Nav";
-import Filters from "./Filters";
 
 class Houses extends React.Component {
   state = {
@@ -126,8 +126,6 @@ class Houses extends React.Component {
   render() {
     return (
       <>
-        <Nav />
-
         <Filters
           categories={this.state.categories}
           properties={this.state.properties}
@@ -157,7 +155,7 @@ class Houses extends React.Component {
               zoom={this.state.map.zoom}
             >
               {this.state.properties.map((h, i) => (
-                <Pin2
+                <Pin
                   property={h}
                   lat={h.lat}
                   lng={h.lng}

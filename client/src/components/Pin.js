@@ -1,46 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-class Pin extends React.Component {
-  state = {
-    property: this.props.property,
-    lat: this.props.lat,
-    lng: this.props.lng,
-    showPrice: this.props.showPrice,
-  };
-  componentWillMount() {
-    this.setState({
-      property: this.props.property,
-      lat: this.props.lat,
-      lng: this.props.lng,
-      showPrice: this.props.showPrice,
-    });
-  }
-  componentWillReceiveProps(props) {
-    this.setState({
-      property: this.props.property,
-      lat: this.props.lat,
-      lng: this.props.lng,
-      showPrice: this.props.showPrice,
-    });
-  }
+const Pin2 = ({ property, lat, lng, showPrice }) => {
+  const [values, setValues] = useState({
+    property,
+    lat,
+    lng,
+    showPrice,
+  });
 
-  formatPrice = (price) => {
+  const formatPrice = (price) => {
     return (price / 1000).toString().concat("K");
   };
+  return (
+    <div
+      className={property.selected ? "pin selected" : "pin"}
+      lat={lat}
+      lng={lng}
+    >
+      {showPrice ? <label>${formatPrice(property.Price)}</label> : null}
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div
-        className={this.state.property.selected ? "pin selected" : "pin"}
-        lat={this.state.lat}
-        lng={this.state.lng}
-      >
-        {showPrice ? (
-          <label>${this.formatPrice(this.state.property.Price)}</label>
-        ) : null}
-      </div>
-    );
-  }
-}
-
-export default Pin;
+export default Pin2;
