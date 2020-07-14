@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
 
-import Nav from "./Nav";
 import Gallery from "./Gallery";
+
+import PhotoModal from "./PhotoModal";
 import GoogleMap from "google-map-react";
 import Pin from "./Pin";
 
@@ -10,7 +11,6 @@ import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/users.css";
 import "../styles/gallery.css";
-import "../styles/review.css";
 
 class Property extends React.Component {
   state = {
@@ -62,6 +62,7 @@ class Property extends React.Component {
     return (
       <>
         <Gallery photos={property.Photos} />
+        {/* <PhotoModal /> */}
         <div className="grid medium">
           <div className="grid sidebar-right">
             <div className="content">

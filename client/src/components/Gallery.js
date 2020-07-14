@@ -1,40 +1,50 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import PhotoModal from "./PhotoModal";
 
-export default class Gallery extends Component {
-  state = {
-    selectedImage: this.props.photos,
+const Gallery = ({ photos }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(true);
   };
-  componentWillReceiveProps(props) {
-    this.setState({
-      photos: props.photos,
-      selectedImage: props.photos[0].url,
-    });
-  }
 
-  render() {
-    return (
-      <>
-        <div className="gallery">
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="gallery">
+      {photos ? (
+        <>
           <div
             className="image-main"
             style={{
-              backgroundImage: `url('${process.env.REACT_APP_API}${this.state.selectedImage}')`,
+              backgroundImage: `url('${process.env.REACT_APP_API}${photos[0].url}')`,
             }}
           ></div>
           <div className="previews">
-            {this.state.photos &&
-              this.state.photos.map((image, i) => (
+            {photos &&
+              photos.map((image, i) => (
                 <div
                   className="preview"
+                  onClick={() => handleOpen()}
                   key={i}
                   style={{
                     backgroundImage: `url('${process.env.REACT_APP_API}${image.url}')`,
                   }}
                 ></div>
               ))}
+            <PhotoModal
+              photos={photos}
+              isOpen={isOpen}
+              handleClose={handleClose}
+              handleOpen={handleOpen}
+            />
           </div>
-        </div>
-      </>
-    );
-  }
-}
+        </>
+      ) : null}
+    </div>
+  );
+};
+
+export default Gallery;
