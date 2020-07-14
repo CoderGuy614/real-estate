@@ -22,7 +22,7 @@
       "type": "integer"
     },
     "Bathrooms": {
-      "type": "integer"
+      "type": "decimal"
     },
     "SquareFeet": {
       "type": "integer"
@@ -54,6 +54,27 @@
         "under_contract",
         "sold"
       ]
+    },
+    "lat": {
+      "type": "decimal"
+    },
+    "lng": {
+      "type": "decimal"
+    },
+    "realtor": {
+      "model": "realtors"
+    },
+    "Fireplace": {
+      "type": "boolean"
+    },
+    "Patio": {
+      "type": "boolean"
+    },
+    "Fence": {
+      "type": "boolean"
+    },
+    "Pool": {
+      "type": "boolean"
     }
   }
 }
