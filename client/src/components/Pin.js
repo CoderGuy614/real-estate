@@ -5,12 +5,14 @@ class Pin extends React.Component {
     property: this.props.property,
     lat: this.props.lat,
     lng: this.props.lng,
+    showPrice: this.props.showPrice,
   };
   componentWillMount() {
     this.setState({
-      house: this.props.house,
+      property: this.props.property,
       lat: this.props.lat,
       lng: this.props.lng,
+      showPrice: this.props.showPrice,
     });
   }
   componentWillReceiveProps(props) {
@@ -18,6 +20,7 @@ class Pin extends React.Component {
       property: this.props.property,
       lat: this.props.lat,
       lng: this.props.lng,
+      showPrice: this.props.showPrice,
     });
   }
 
@@ -32,7 +35,9 @@ class Pin extends React.Component {
         lat={this.state.lat}
         lng={this.state.lng}
       >
-        <label>${this.formatPrice(this.state.property.Price)}</label>
+        {showPrice ? (
+          <label>${this.formatPrice(this.state.property.Price)}</label>
+        ) : null}
       </div>
     );
   }

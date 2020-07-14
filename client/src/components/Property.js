@@ -1,12 +1,11 @@
 import React from "react";
 import axios from "axios";
-// Components
+
 import Nav from "./Nav";
 import Gallery from "./Gallery";
-import StarRating from "./StarRating";
-import Review from "./Review";
+import GoogleMap from "google-map-react";
+import Pin2 from "./Pin2";
 
-// CSS
 import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/users.css";
@@ -20,7 +19,15 @@ class Property extends React.Component {
       category: {},
       realtor: {},
     },
+    map: {
+      key: {
+        key: `${process.env.REACT_APP_MAP_KEY}`,
+      },
+      center: {},
+      zoom: 14,
+    },
   };
+
   componentDidMount() {
     axios
       .get(
@@ -29,6 +36,10 @@ class Property extends React.Component {
       .then((res) => {
         this.setState({
           property: res.data,
+          map: {
+            ...this.state.map,
+            center: { lat: res.data.lat, lng: res.data.lng },
+          },
         });
       })
       .catch((err) => {
@@ -48,17 +59,18 @@ class Property extends React.Component {
   };
 
   render() {
+    const { property, map } = this.state;
     return (
       <>
         <Nav />
-        <Gallery photos={this.state.property.Photos} />
+        <Gallery photos={property.Photos} />
         <div className="grid medium">
           <div className="grid sidebar-right">
             <div className="content">
-              <h1>{this.state.property.title}</h1>
+              <h1>{property.title}</h1>
               <small>
                 <i className="fas fa-map-marker-alt"></i>
-                <span>{this.state.property.Address}</span>
+                <span>{property.Address}</span>
               </small>
               <div className="user">
                 <div
@@ -68,7 +80,7 @@ class Property extends React.Component {
                   }}
                 ></div>
                 <div className="name">
-                  <small>Listed by: {this.state.property.realtor.Name}</small>
+                  <small>Listed by: {property.realtor.Name}</small>
                 </div>
               </div>
               <div className="card specs">
@@ -76,70 +88,52 @@ class Property extends React.Component {
                   <ul className="grid two">
                     <li>
                       <i className="fas fa-fw fa-home"></i>
-                      {this.state.property.category.name}
+                      {property.category.name}
                     </li>
-                    {/* <li>
-                      <i className="fas fa-fw fa-user-friends"></i>
-                      {this.state.property.guests} guests
-                    </li> */}
+
                     <li>
                       <i className="fas fa-fw fa-bed"></i>
-                      {this.state.property.Bedrooms} bedrooms
+                      {property.Bedrooms} bedrooms
                     </li>
                     <li>
                       <i className="fas fa-fw fa-bath"></i>
-                      {this.state.property.Bathrooms} bathrooms
+                      {property.Bathrooms} bathrooms
                     </li>
                   </ul>
                 </div>
               </div>
-              <p>{this.state.property.description}</p>
+              <p>{property.description}</p>
               <h3>Amenities</h3>
               <div className="card specs">
                 <div className="content">
                   <ul className="grid two">
-                    {this.getAmenities(this.state.property).map((a, i) => {
-                      return (
-                        <li key={i}>
-                          {/* <i className={`fas fa-fw fa-${a.icon}`}></i> */}
-                          {a}
-                        </li>
-                      );
+                    {this.getAmenities(property).map((a, i) => {
+                      return <li key={i}>{a}</li>;
                     })}
                   </ul>
                 </div>
               </div>
-              {/* <Review reviews={this.state.reviews} /> */}
             </div>
             <div className="sidebar">
               <div className="card shadow">
                 <span className="asking-price">Asking Price:</span>
                 <div className="content large">
-                  <h3>${Number(this.state.property.Price).toLocaleString()}</h3>
-                  {/* <small>
-                    <StarRating rating={this.state.house.rating} />
-                    <span>{this.state.reviews.length} Reviews</span>
-                  </small> */}
-                  {/* <form className="small">
-                    <div className="group">
-                      <label>Guests</label>
-                      <select>
-                        {[...Array(this.state.house.guests)].map((g, i) => {
-                          return (
-                            <option key={i} value="">
-                              {i + 1} guests
-                            </option>
-                          );
-                        })}
-                      </select>
-                    </div>
-                    <div className="group">
-                      <button className="secondary full" type="submit">
-                        Book this house
-                      </button>
-                    </div>
-                  </form> */}
+                  <h3>${Number(property.Price).toLocaleString()}</h3>
                 </div>
+              </div>
+              <div className="detail-map">
+                <GoogleMap
+                  bootstrapURLKeys={map.key}
+                  center={map.center}
+                  zoom={map.zoom}
+                >
+                  <Pin2
+                    property={property}
+                    lat={property.lat}
+                    lng={property.lng}
+                    key={property.id}
+                  />
+                </GoogleMap>
               </div>
             </div>
           </div>

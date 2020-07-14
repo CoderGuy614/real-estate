@@ -7,10 +7,9 @@ import "../styles/grid.css";
 import "../styles/maps.css";
 import "../styles/nav.css";
 import Thumbnail from "./Thumbnail";
-import Pin from "./Pin";
+import Pin2 from "./Pin2";
 import Nav from "./Nav";
 import Filters from "./Filters";
-import Review from "./Review";
 
 class Houses extends React.Component {
   state = {
@@ -22,10 +21,10 @@ class Houses extends React.Component {
         key: `${process.env.REACT_APP_MAP_KEY}`,
       },
       center: {
-        lat: 33.77596,
-        lng: -84.48497,
+        lat: 33.749,
+        lng: -84.388,
       },
-      zoom: 14,
+      zoom: 10,
     },
     filterValues: {
       bedrooms: 0,
@@ -158,7 +157,13 @@ class Houses extends React.Component {
               zoom={this.state.map.zoom}
             >
               {this.state.properties.map((h, i) => (
-                <Pin property={h} lat={h.lat} lng={h.lng} key={i} />
+                <Pin2
+                  property={h}
+                  lat={h.lat}
+                  lng={h.lng}
+                  key={i}
+                  showPrice={true}
+                />
               ))}
             </GoogleMap>
           </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import StarRating from "./StarRating";
 
 class Thumbnail extends React.Component {
   state = {
