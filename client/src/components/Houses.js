@@ -9,7 +9,6 @@ import Filters from "./Filters";
 import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/maps.css";
-import "../styles/nav.css";
 
 class Houses extends React.Component {
   state = {
@@ -35,14 +34,12 @@ class Houses extends React.Component {
 
   filter = () => {
     const { filterValues, originalProperties } = this.state;
-    let result = [];
-
-    result = originalProperties.filter((h) => {
+    let result = originalProperties.filter((h) => {
       return (
         h.Bedrooms >= filterValues.bedrooms && h.Price <= filterValues.maxPrice
       );
     });
-    if (filterValues.category !== null && filterValues !== "all") {
+    if (filterValues.category !== null && filterValues.category !== "all") {
       result = result.filter((h) => {
         return h.category.name == filterValues.category;
       });
@@ -62,17 +59,14 @@ class Houses extends React.Component {
   };
 
   bedroomSelect = (e) => {
-    let bedroomChoice = e.target.value;
     let filterValues = {
       ...this.state.filterValues,
       bedrooms: Number(e.target.value),
     };
-    console.log(filterValues);
     this.setState({ ...this.state, filterValues });
   };
 
   typeSelect = (e) => {
-    let typeChoice = e.target.value;
     let filterValues = { ...this.state.filterValues, category: e.target.value };
     this.setState({ ...this.state, filterValues });
   };

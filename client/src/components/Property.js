@@ -9,7 +9,6 @@ import Pin from "./Pin";
 import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/users.css";
-import "../styles/nav.css";
 import "../styles/gallery.css";
 import "../styles/review.css";
 

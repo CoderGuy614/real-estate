@@ -1,11 +1,5 @@
 html,
 body,
-nav {
-  padding: 0;
-  margin: 0;
-  font-family: Lato, sans-serif;
-}
-
 p {
   color: #4f4f4f;
   font-size: 17px;
@@ -193,15 +187,18 @@ form textarea {
   height: 100px;
 }
 
-select {
+.filter-form {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  height: 50px;
-  background: white;
-  font-size: 16px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 1px solid #e2e2e2;
-  cursor: pointer;
+  margin: 10px 10px 0px 20px;
+  padding: 10px 0px;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+.filter {
+  width: auto;
 }
 
 label.checkbox input {
@@ -241,59 +238,29 @@ form .rating {
 
 /* filters */
 
-.filters {
+.filter-form {
   padding: 10px 50px;
   border-bottom: 1px solid #e2e2e2;
+  justify-content: space-between;
 }
 
-.filters button {
-  height: 33px;
-  font-size: 14px;
-  padding: 7px 12px;
-  background: white;
-  border: 1px solid #e2e2e2;
-  margin-right: 10px;
-  border-radius: 5px;
-  cursor: pointer;
+.form-row {
+  width: 100%;
+  display: flex;
 }
 
-.filters button:hover {
-  background-color: tomato;
-  border-color: tomato;
-  color: white;
+.filter-button {
+  height: 40px;
+  text-transform: uppercase;
+  margin-top: 30px;
 }
 
-.filters select {
-  height: 34px;
-  width: auto;
-  font-size: 14px;
-  background: white;
-  border: 1px solid #e2e2e2;
-  cursor: pointer;
-  border-radius: 3px;
-  min-width: 100px;
-  margin-right: 10px;
-  box-sizing: border-box;
+.navbar-brand {
+  float: left;
 }
 
-.filters .search {
-  min-width: 250px;
-}
-
-.filters input {
-  height: 34px;
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 3px;
-  border: 1px solid #e2e2e2;
-  width: 100px;
-  margin-right: 10px;
-  box-sizing: border-box;
-  vertical-align: top;
-}
-
-.filters .search input:focus {
-  border-color: #00988f;
+.contact-button {
+  float: right;
 }
 
 .asking-price {
