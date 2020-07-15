@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import GoogleMap from "google-map-react";
 import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
@@ -107,13 +106,11 @@ class Houses extends React.Component {
         <div className="grid map">
           <div className="grid four large">
             {this.state.properties.map((property, index) => (
-              <Link key={index} to={`/property/${property.id}`}>
-                <Thumbnail
-                  property={property}
-                  key={index}
-                  houseHover={this.houseHover}
-                />
-              </Link>
+              <Thumbnail
+                property={property}
+                key={index}
+                houseHover={this.houseHover}
+              />
             ))}
           </div>
           <div className="map">

@@ -284,4 +284,5 @@ form .rating {
   position: relative;
   top: 80%;
   right: -85%;
+  cursor: pointer;
 }

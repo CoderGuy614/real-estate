@@ -18,12 +18,29 @@ const Favorite = ({
   return (
     <span
       className={`${isThumbnail ? "heart-thumbnail" : "favorite"}`}
-      onClick={() => toggleFavorite(property)}
+      //   onClick={(e) => {
+      //     e.stopPropagation();
+      //     toggleFavorite(property);
+      //   }}
     >
       {favorites.includes(property) ? (
-        <HeartFill color="red" size={25} />
+        <HeartFill
+          onClick={(e) => {
+            e.preventDefault();
+            toggleFavorite(property);
+          }}
+          color="red"
+          size={25}
+        />
       ) : (
-        <HeartFill color={isThumbnail ? "white" : "gray"} size={25} />
+        <HeartFill
+          onClick={(e) => {
+            e.preventDefault();
+            toggleFavorite(property);
+          }}
+          color={isThumbnail ? "white" : "gray"}
+          size={25}
+        />
       )}{" "}
     </span>
   );

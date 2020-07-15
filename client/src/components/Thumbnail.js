@@ -3,7 +3,11 @@ import Favorite from "./Favorite";
 
 const Thumbnail = ({ property, houseHover }) => {
   return (
-    <a className="card link" onMouseEnter={(e) => houseHover(property.id)}>
+    <a
+      href={`/property/${property.id}`}
+      className="card link"
+      onMouseEnter={(e) => houseHover(property.id)}
+    >
       <div
         className="image"
         style={{
@@ -12,6 +16,7 @@ const Thumbnail = ({ property, houseHover }) => {
       >
         <Favorite property={property} isThumbnail={true} />
       </div>
+
       <div className="content">
         <small className="meta">
           {property.category.name} • {property.Bedrooms} Bedrooms •{" "}
