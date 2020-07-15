@@ -1,10 +1,7 @@
 import React from "react";
 import Favorite from "./Favorite";
 
-// import { connect } from "react-redux";
-// import { addFavorite, removeFavorite } from "../actions/favorite";
-
-const Thumbnail = ({ property, houseHover, favorites }) => {
+const Thumbnail = ({ property, houseHover }) => {
   return (
     <a className="card link" onMouseEnter={(e) => houseHover(property.id)}>
       <div
@@ -12,7 +9,9 @@ const Thumbnail = ({ property, houseHover, favorites }) => {
         style={{
           backgroundImage: `url('${process.env.REACT_APP_API}${property.Photos[0].url}')`,
         }}
-      ></div>
+      >
+        <Favorite property={property} isThumbnail={true} />
+      </div>
       <div className="content">
         <small className="meta">
           {property.category.name} • {property.Bedrooms} Bedrooms •{" "}
@@ -24,14 +23,9 @@ const Thumbnail = ({ property, houseHover, favorites }) => {
           <span>{property.Address}</span>
         </small>
         <span className="price">${property.Price}</span>
-        <Favorite property={property} />
       </div>
     </a>
   );
 };
-
-// const mapStateToProps = (state) => ({
-//   favorites: state.favorites,
-// });
 
 export default Thumbnail;

@@ -279,3 +279,9 @@ form .rating {
 .favorite {
   margin-left: 15px;
 }
+
+.heart-thumbnail {
+  position: relative;
+  top: 80%;
+  right: -85%;
+}
