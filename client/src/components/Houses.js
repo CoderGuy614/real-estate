@@ -1,10 +1,10 @@
 import React from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import GoogleMap from "google-map-react";
 import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
 import Filters from "./Filters";
+import { getProperties, getCategories } from "./apiCore";
 
 import "../styles/cards.css";
 import "../styles/grid.css";
@@ -30,6 +30,21 @@ class Houses extends React.Component {
       category: null,
       maxPrice: 1000000000000000,
     },
+  };
+
+  componentDidMount = () => {
+    getCategories().then((categories) => {
+      this.setState({
+        categories,
+      });
+    });
+
+    getProperties().then((properties) => {
+      this.setState({
+        properties,
+        originalProperties: properties,
+      });
+    });
   };
 
   filter = () => {
@@ -65,12 +80,10 @@ class Houses extends React.Component {
     };
     this.setState({ ...this.state, filterValues });
   };
-
   typeSelect = (e) => {
     let filterValues = { ...this.state.filterValues, category: e.target.value };
     this.setState({ ...this.state, filterValues });
   };
-
   maxPrice = (e) => {
     let filterValues = {
       ...this.state.filterValues,
@@ -79,44 +92,6 @@ class Houses extends React.Component {
     this.setState({ ...this.state, filterValues });
   };
 
-  search = (e) => {
-    let target = e.target.value.toLowerCase();
-    let originalProperties = this.state.originalProperties;
-    let properties = originalProperties.filter((h) => {
-      return (
-        h.Title.toLowerCase().includes(target) ||
-        h.Address.toLowerCase().includes(target)
-      );
-    });
-    this.setState({
-      properties,
-      originalProperties,
-    });
-  };
-
-  componentDidMount() {
-    axios
-      .get(`${process.env.REACT_APP_API}/properties`)
-      .then((res) => {
-        this.setState({
-          properties: res.data,
-          originalProperties: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log({ err });
-      });
-    axios
-      .get(`${process.env.REACT_APP_API}/categories`)
-      .then((res) => {
-        let catArray = [];
-        res.data.map((cat) => catArray.push(cat.name));
-        this.setState({
-          categories: catArray,
-        });
-      })
-      .catch((err) => console.log(err));
-  }
   render() {
     return (
       <>
@@ -126,7 +101,6 @@ class Houses extends React.Component {
           maxPrice={this.maxPrice}
           typeSelect={this.typeSelect}
           bedroomSelect={this.bedroomSelect}
-          search={this.search}
           filter={this.filter}
         />
 
