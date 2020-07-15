@@ -1,5 +1,5 @@
 import React from "react";
-import { Heart } from "react-bootstrap-icons";
+import { Heart, HeartFill } from "react-bootstrap-icons";
 import { getProperty, getAmenities } from "./apiCore";
 import Gallery from "./Gallery";
 
@@ -12,7 +12,7 @@ import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/users.css";
 import "../styles/gallery.css";
-import { addFavorite } from "../actions/favorite";
+import { addFavorite, removeFavorite } from "../actions/favorite";
 
 class Property extends React.Component {
   state = {
@@ -45,9 +45,16 @@ class Property extends React.Component {
       });
   };
 
+  toggleFavorite = (property) => {
+    const { favorites, addFavorite, removeFavorite } = this.props;
+    favorites.includes(property)
+      ? removeFavorite(property)
+      : addFavorite(property);
+  };
+
   render() {
     const { property, map } = this.state;
-    const { addFavorite } = this.props;
+    const { addFavorite, removeFavorite, favorites } = this.props;
     return (
       <>
         <Gallery photos={property.Photos} />
@@ -59,10 +66,18 @@ class Property extends React.Component {
                 <i className="fas fa-map-marker-alt"></i>
                 <span>{property.Address}</span>
               </small>
-              <Heart
-                onClick={() => addFavorite(property)}
-                className="heart-empty-icon"
-              />
+
+              <span
+                className="favorite"
+                onClick={() => this.toggleFavorite(property)}
+              >
+                {favorites.includes(property) ? (
+                  <HeartFill color="red" size={25} />
+                ) : (
+                  <Heart size={25} />
+                )}{" "}
+                Add to My Favorites
+              </span>
               <div className="user">
                 <div
                   className="avatar"
@@ -139,4 +154,6 @@ const mapStateToProps = (state) => ({
   favorites: state.favorites,
 });
 
-export default connect(mapStateToProps, { addFavorite })(Property);
+export default connect(mapStateToProps, { addFavorite, removeFavorite })(
+  Property
+);

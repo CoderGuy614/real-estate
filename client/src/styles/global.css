@@ -276,6 +276,6 @@ form .rating {
   height: 100px;
 }
 
-.heart-empty-icon {
-  margin-left: 25px;
+.favorite {
+  margin-left: 15px;
 }
