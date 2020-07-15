@@ -18,6 +18,28 @@ export const getProperties = () => {
       return res.data;
     })
     .catch((err) => {
-      console.log({ err });
+      console.log(err);
     });
+};
+
+export const getProperty = (id) => {
+  return axios
+    .get(`${process.env.REACT_APP_API}/properties/${id}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getAmenities = (object) => {
+  let amenities = [];
+  let values = ["Fireplace", "Patio", "Fence", "Pool"];
+  for (let key in object) {
+    if (values.includes(key) && object[key] === true) {
+      amenities.push(key);
+    }
+  }
+  return amenities;
 };

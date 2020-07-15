@@ -1,9 +1,7 @@
 import React from "react";
-import axios from "axios";
-
+import { getProperty, getAmenities } from "./apiCore";
 import Gallery from "./Gallery";
 
-import PhotoModal from "./PhotoModal";
 import GoogleMap from "google-map-react";
 import Pin from "./Pin";
 
@@ -27,34 +25,20 @@ class Property extends React.Component {
     },
   };
 
-  componentDidMount() {
-    axios
-      .get(
-        `${process.env.REACT_APP_API}/properties/${this.props.match.params.id}`
-      )
+  componentDidMount = () => {
+    getProperty(this.props.match.params.id)
       .then((res) => {
         this.setState({
-          property: res.data,
+          property: res,
           map: {
             ...this.state.map,
-            center: { lat: res.data.lat, lng: res.data.lng },
+            center: { lat: res.lat, lng: res.lng },
           },
         });
       })
       .catch((err) => {
         console.log({ err });
       });
-  }
-
-  getAmenities = (object) => {
-    let amenities = [];
-    let values = ["Fireplace", "Patio", "Fence", "Pool"];
-    for (let key in object) {
-      if (values.includes(key) && object[key] === true) {
-        amenities.push(key);
-      }
-    }
-    return amenities;
   };
 
   render() {
@@ -62,7 +46,6 @@ class Property extends React.Component {
     return (
       <>
         <Gallery photos={property.Photos} />
-        {/* <PhotoModal /> */}
         <div className="grid medium">
           <div className="grid sidebar-right">
             <div className="content">
@@ -106,7 +89,7 @@ class Property extends React.Component {
               <div className="card specs">
                 <div className="content">
                   <ul className="grid two">
-                    {this.getAmenities(property).map((a, i) => {
+                    {getAmenities(property).map((a, i) => {
                       return <li key={i}>{a}</li>;
                     })}
                   </ul>
