@@ -5,7 +5,9 @@ import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
 import Filters from "./Filters";
 import { getProperties, getCategories } from "./apiCore";
+import { addFavorite } from "../actions/favorite";
 
+import { connect } from "react-redux";
 import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/maps.css";
@@ -139,4 +141,8 @@ class Houses extends React.Component {
   }
 }
 
-export default Houses;
+const mapStateToProps = (state) => ({
+  favorites: state.favorites,
+});
+
+export default connect(mapStateToProps)(Houses);

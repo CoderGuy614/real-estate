@@ -1,14 +1,18 @@
 import React from "react";
+import { Heart } from "react-bootstrap-icons";
 import { getProperty, getAmenities } from "./apiCore";
 import Gallery from "./Gallery";
 
 import GoogleMap from "google-map-react";
 import Pin from "./Pin";
 
+import { connect } from "react-redux";
+
 import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/users.css";
 import "../styles/gallery.css";
+import { addFavorite } from "../actions/favorite";
 
 class Property extends React.Component {
   state = {
@@ -43,6 +47,7 @@ class Property extends React.Component {
 
   render() {
     const { property, map } = this.state;
+    const { addFavorite } = this.props;
     return (
       <>
         <Gallery photos={property.Photos} />
@@ -54,6 +59,10 @@ class Property extends React.Component {
                 <i className="fas fa-map-marker-alt"></i>
                 <span>{property.Address}</span>
               </small>
+              <Heart
+                onClick={() => addFavorite(property)}
+                className="heart-empty-icon"
+              />
               <div className="user">
                 <div
                   className="avatar"
@@ -102,6 +111,7 @@ class Property extends React.Component {
                 <div className="content large">
                   <h3>${Number(property.Price).toLocaleString()}</h3>
                 </div>
+                <i className="fa fa-heart-o" aria-hidden="true"></i>
               </div>
               <div className="detail-map">
                 <GoogleMap
@@ -125,4 +135,8 @@ class Property extends React.Component {
   }
 }
 
-export default Property;
+const mapStateToProps = (state) => ({
+  favorites: state.favorites,
+});
+
+export default connect(mapStateToProps, { addFavorite })(Property);

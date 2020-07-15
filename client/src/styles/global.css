@@ -275,3 +275,7 @@ form .rating {
 .logo {
   height: 100px;
 }
+
+.heart-empty-icon {
+  margin-left: 25px;
+}
