@@ -6,13 +6,14 @@ import Gallery from "./Gallery";
 import GoogleMap from "google-map-react";
 import Pin from "./Pin";
 
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 
 import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/users.css";
 import "../styles/gallery.css";
-import { addFavorite, removeFavorite } from "../actions/favorite";
+// import { addFavorite, removeFavorite } from "../actions/favorite";
+import Favorite from "./Favorite";
 
 class Property extends React.Component {
   state = {
@@ -45,16 +46,9 @@ class Property extends React.Component {
       });
   };
 
-  toggleFavorite = (property) => {
-    const { favorites, addFavorite, removeFavorite } = this.props;
-    favorites.includes(property)
-      ? removeFavorite(property)
-      : addFavorite(property);
-  };
-
   render() {
     const { property, map } = this.state;
-    const { addFavorite, removeFavorite, favorites } = this.props;
+    const { favorites } = this.props;
     return (
       <>
         <Gallery photos={property.Photos} />
@@ -66,18 +60,7 @@ class Property extends React.Component {
                 <i className="fas fa-map-marker-alt"></i>
                 <span>{property.Address}</span>
               </small>
-
-              <span
-                className="favorite"
-                onClick={() => this.toggleFavorite(property)}
-              >
-                {favorites.includes(property) ? (
-                  <HeartFill color="red" size={25} />
-                ) : (
-                  <Heart size={25} />
-                )}{" "}
-                Add to My Favorites
-              </span>
+              <Favorite property={property} />
               <div className="user">
                 <div
                   className="avatar"
@@ -150,10 +133,8 @@ class Property extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  favorites: state.favorites,
-});
+// const mapStateToProps = (state) => ({
+//   favorites: state.favorites,
+// });
 
-export default connect(mapStateToProps, { addFavorite, removeFavorite })(
-  Property
-);
+export default Property;
