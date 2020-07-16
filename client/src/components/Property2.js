@@ -11,7 +11,7 @@ import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/users.css";
 import "../styles/gallery.css";
-// import { addFavorite, removeFavorite } from "../actions/favorite";
+
 import Favorite from "./Favorite";
 
 class Property extends React.Component {

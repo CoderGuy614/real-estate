@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import GoogleMap from "google-map-react";
-import Button from "react-bootstrap/Button";
 import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
 import Filters from "./Filters";
@@ -12,62 +11,54 @@ import "../styles/cards.css";
 import "../styles/grid.css";
 import "../styles/maps.css";
 
-class Houses extends React.Component {
-  state = {
-    originalProperties: [],
-    properties: [],
-    categories: [],
-    map: {
-      key: {
-        key: `${process.env.REACT_APP_MAP_KEY}`,
-      },
-      center: {
-        lat: 33.749,
-        lng: -84.388,
-      },
-      zoom: 10,
-    },
-    filterValues: {
-      bedrooms: 0,
-      category: null,
-      maxPrice: 1000000000000000,
-    },
-  };
+const Houses = ({
+  favorites: { favorites },
+  showFavorites: { showFavorites },
+}) => {
+  const [properties, setProperties] = useState([]);
+  const [originalProperties, setOriginalProperties] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [map, setMap] = useState({
+    key: { key: `${process.env.REACT_APP_MAP_KEY}` },
+    center: { lat: 33.749, lng: -84.388 },
+    zoom: 10,
+  });
+  const [filterValues, setFilterValues] = useState({
+    bedrooms: 0,
+    category: null,
+    maxPrice: 1000000000,
+  });
 
-  componentDidMount = () => {
-    getCategories().then((categories) => {
-      this.setState({
-        categories,
-      });
+  useEffect(() => {
+    getCategories().then((cat) => {
+      setCategories(cat);
+    });
+    getProperties().then((prop) => {
+      setProperties(prop);
+      setOriginalProperties(prop);
+    });
+  }, []);
+
+  useEffect(() => {
+    showFavorites
+      ? setProperties(
+          originalProperties.filter((prop) => favorites.includes(prop.id))
+        )
+      : setProperties(originalProperties);
+  }, [showFavorites, favorites]);
+
+  const houseHover = (id) => {
+    let houses = properties.map((h) => {
+      h.selected = false;
+      return h;
     });
 
-    getProperties().then((properties) => {
-      this.setState({
-        properties,
-        originalProperties: properties,
-      });
-    });
+    let house = houses.find((h) => h.id == id);
+    house.selected = true;
+    setProperties(houses);
   };
 
-  componentWillReceiveProps({
-    favorites: { favorites },
-    showFavorites: { showFavorites },
-  }) {
-    if (showFavorites) {
-      this.setState({
-        properties: this.state.originalProperties.filter((prop) =>
-          favorites.includes(prop.id)
-        ),
-      });
-    } else {
-      this.setState({
-        properties: this.state.originalProperties,
-      });
-    }
-  }
-
-  filter = () => {
-    const { filterValues, originalProperties } = this.state;
+  const filter = () => {
     let result = originalProperties.filter((h) => {
       return (
         h.Bedrooms >= filterValues.bedrooms && h.Price <= filterValues.maxPrice
@@ -78,83 +69,61 @@ class Houses extends React.Component {
         return h.category.name == filterValues.category;
       });
     }
-    this.setState({ properties: result });
+    setProperties(result);
+  };
+  const bedroomSelect = (e) => {
+    setFilterValues({ ...filterValues, bedrooms: Number(e.target.value) });
   };
 
-  houseHover = (id) => {
-    let properties = this.state.properties;
-    properties.map((h) => {
-      h.selected = false;
-      return h;
-    });
-    let property = properties.find((h) => h.id == id);
-    property.selected = true;
-    this.setState({ properties });
+  const typeSelect = (e) => {
+    setFilterValues({ ...filterValues, category: e.target.value });
+  };
+  const maxPrice = (e) => {
+    setFilterValues({ ...filterValues, maxPrice: e.target.value });
   };
 
-  bedroomSelect = (e) => {
-    let filterValues = {
-      ...this.state.filterValues,
-      bedrooms: Number(e.target.value),
-    };
-    this.setState({ ...this.state, filterValues });
-  };
-  typeSelect = (e) => {
-    let filterValues = { ...this.state.filterValues, category: e.target.value };
-    this.setState({ ...this.state, filterValues });
-  };
-  maxPrice = (e) => {
-    let filterValues = {
-      ...this.state.filterValues,
-      maxPrice: Number(e.target.value),
-    };
-    this.setState({ ...this.state, filterValues });
-  };
+  return (
+    <>
+      <Filters
+        categories={categories}
+        properties={properties}
+        maxPrice={maxPrice}
+        typeSelect={typeSelect}
+        bedroomSelect={bedroomSelect}
+        filter={filter}
+      />
 
-  render() {
-    return (
-      <>
-        <Filters
-          categories={this.state.categories}
-          properties={this.state.properties}
-          maxPrice={this.maxPrice}
-          typeSelect={this.typeSelect}
-          bedroomSelect={this.bedroomSelect}
-          filter={this.filter}
-        />
-
-        <div className="grid map">
-          <div className="grid four large">
-            {this.state.properties.map((property, index) => (
-              <Thumbnail
-                property={property}
-                key={index}
-                houseHover={this.houseHover}
+      <div className="grid map">
+        <div className="grid four large">
+          {properties.map((property, index) => (
+            <Thumbnail
+              property={property}
+              key={index}
+              houseHover={houseHover}
+            />
+          ))}
+        </div>
+        <div className="map">
+          <GoogleMap
+            bootstrapURLKeys={map.key}
+            center={map.center}
+            zoom={map.zoom}
+          >
+            {properties.map((h, i) => (
+              <Pin
+                property={h}
+                lat={h.lat}
+                lng={h.lng}
+                key={i}
+                showPrice={true}
               />
             ))}
-          </div>
-          <div className="map">
-            <GoogleMap
-              bootstrapURLKeys={this.state.map.key}
-              center={this.state.map.center}
-              zoom={this.state.map.zoom}
-            >
-              {this.state.properties.map((h, i) => (
-                <Pin
-                  property={h}
-                  lat={h.lat}
-                  lng={h.lng}
-                  key={i}
-                  showPrice={true}
-                />
-              ))}
-            </GoogleMap>
-          </div>
+          </GoogleMap>
         </div>
-      </>
-    );
-  }
-}
+      </div>
+    </>
+  );
+};
 
 const mapStateToProps = (state) => ({
   favorites: state.favoriteReducer,

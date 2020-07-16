@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
 
-function PhotoModal({ isOpen, handleOpen, handleClose, photos }) {
+function PhotoModal({ isOpen, handleClose, photos }) {
   return (
     <>
-      {/* <Button variant="primary" onClick={handleOpen}>
-        View Photo Gallery
-      </Button> */}
-
       <Modal show={isOpen} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Photo Gallery</Modal.Title>
@@ -21,7 +17,7 @@ function PhotoModal({ isOpen, handleOpen, handleClose, photos }) {
                 <img
                   className="d-block w-100"
                   src={`${process.env.REACT_APP_API}${photo.url}`}
-                  alt="photo"
+                  alt=""
                 />
               </Carousel.Item>
             ))}
