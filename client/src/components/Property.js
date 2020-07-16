@@ -47,7 +47,6 @@ class Property extends React.Component {
 
   render() {
     const { property, map } = this.state;
-    const { favorites } = this.props;
     return (
       <>
         <Gallery photos={property.Photos} />

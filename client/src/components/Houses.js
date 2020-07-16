@@ -18,7 +18,7 @@ const Houses = ({
   const [properties, setProperties] = useState([]);
   const [originalProperties, setOriginalProperties] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [map, setMap] = useState({
+  const [map] = useState({
     key: { key: `${process.env.REACT_APP_MAP_KEY}` },
     center: { lat: 33.749, lng: -84.388 },
     zoom: 10,
@@ -45,6 +45,7 @@ const Houses = ({
           originalProperties.filter((prop) => favorites.includes(prop.id))
         )
       : setProperties(originalProperties);
+    //eslint-disable-next-line
   }, [showFavorites, favorites]);
 
   const houseHover = (id) => {
@@ -53,7 +54,7 @@ const Houses = ({
       return h;
     });
 
-    let house = houses.find((h) => h.id == id);
+    let house = houses.find((h) => h.id === id);
     house.selected = true;
     setProperties(houses);
   };
@@ -66,7 +67,7 @@ const Houses = ({
     });
     if (filterValues.category !== null && filterValues.category !== "all") {
       result = result.filter((h) => {
-        return h.category.name == filterValues.category;
+        return h.category.name === filterValues.category;
       });
     }
     setProperties(result);

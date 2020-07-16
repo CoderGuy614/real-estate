@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const Pin2 = ({ property, lat, lng, showPrice }) => {
-  const [values, setValues] = useState({
-    property,
-    lat,
-    lng,
-    showPrice,
-  });
-
+const Pin = ({ property, lat, lng, showPrice }) => {
   const formatPrice = (price) => {
     return (price / 1000).toString().concat("K");
   };
@@ -22,4 +15,4 @@ const Pin2 = ({ property, lat, lng, showPrice }) => {
   );
 };
 
-export default Pin2;
+export default Pin;

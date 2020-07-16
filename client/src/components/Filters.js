@@ -8,8 +8,8 @@ import { toggleShowFavorites } from "../actions/favorite";
 import { HeartFill } from "react-bootstrap-icons";
 
 const Filters = ({
-  favorites,
-  showFavorites,
+  favorites: { favorites },
+  showFavorites: { showFavorites },
   toggleShowFavorites,
   categories,
   maxPrice,
@@ -133,8 +133,8 @@ const Filters = ({
 };
 
 const mapStateToProps = (state) => ({
-  showFavorites: state.favoriteReducer.showFavorites,
-  favorites: state.favoriteReducer.favorites,
+  showFavorites: state.favoriteReducer,
+  favorites: state.favoriteReducer,
 });
 
 export default connect(mapStateToProps, { toggleShowFavorites })(Filters);

@@ -43,7 +43,7 @@ const Favorite = ({
 Favorite.propTypes = {
   addFavorite: PropTypes.func.isRequired,
   removeFavorite: PropTypes.func.isRequired,
-  favorites: PropTypes.array.isRequired,
+  favorites: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
 };
 
