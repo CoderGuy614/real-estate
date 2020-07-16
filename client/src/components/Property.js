@@ -133,8 +133,4 @@ class Property extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   favorites: state.favorites,
-// });
-
 export default Property;

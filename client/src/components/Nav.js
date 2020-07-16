@@ -5,8 +5,10 @@ import BootstrapNav from "react-bootstrap/Nav";
 import NavLink from "react-bootstrap/NavLink";
 
 import logo from "../assets/homeLogo.png";
+import { connect } from "react-redux";
+import { toggleShowFavorites } from "../actions/favorite";
 
-const Nav = () => {
+const Nav = ({ showFavorites: { showFavorites }, toggleShowFavorites }) => {
   const navBar = () => {
     return (
       <Navbar bg="light" variant="secondary">
@@ -22,8 +24,17 @@ const Nav = () => {
 
         <Navbar.Collapse className="justify-content-end">
           <BootstrapNav pullRight>
-            <NavLink href="/favorites">
-              <Button color="secondary">MY FAVORITES</Button>
+            <NavLink>
+              {showFavorites ? (
+                <Button onClick={toggleShowFavorites} color="secondary">
+                  {" "}
+                  HIDE FAVORITES
+                </Button>
+              ) : (
+                <Button onClick={toggleShowFavorites} color="secondary">
+                  SHOW FAVORITES
+                </Button>
+              )}
             </NavLink>
             <NavLink href="/contact">
               <Button>CONTACT US</Button>
@@ -37,4 +48,8 @@ const Nav = () => {
   return <div>{navBar()}</div>;
 };
 
-export default Nav;
+const mapStateToProps = (state) => ({
+  showFavorites: state.favoriteReducer,
+});
+
+export default connect(mapStateToProps, { toggleShowFavorites })(Nav);
