@@ -6,11 +6,11 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["favorites"],
+  whitelist: ["favoriteReducer"],
 };
 
 const rootReducer = combineReducers({
-  favorites: favoriteReducer,
+  favoriteReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

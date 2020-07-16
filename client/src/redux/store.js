@@ -5,9 +5,7 @@ import thunk from "redux-thunk";
 import rootReducer from "../redux/root-reducer";
 import logger from "redux-logger";
 
-const initialState = {
-  favorites: [],
-};
+const initialState = {};
 
 const middleWare = [logger, thunk];
 

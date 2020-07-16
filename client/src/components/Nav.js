@@ -22,6 +22,9 @@ const Nav = () => {
 
         <Navbar.Collapse className="justify-content-end">
           <BootstrapNav pullRight>
+            <NavLink href="/favorites">
+              <Button color="secondary">MY FAVORITES</Button>
+            </NavLink>
             <NavLink href="/contact">
               <Button>CONTACT US</Button>
             </NavLink>

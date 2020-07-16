@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { addFavorite, removeFavorite } from "../actions/favorite";
 
 const Favorite = ({
-  favorites,
+  favorites: { favorites },
   id,
   addFavorite,
   removeFavorite,
@@ -48,7 +48,7 @@ Favorite.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  favorites: state.favorites,
+  favorites: state.favoriteReducer,
 });
 
 export default connect(mapStateToProps, { addFavorite, removeFavorite })(
