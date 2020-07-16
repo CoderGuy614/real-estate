@@ -249,9 +249,18 @@ form .rating {
   display: flex;
 }
 
-.filter-button,
+.filter-button {
+  height: 45px;
+  text-transform: uppercase;
+  margin-top: 30px;
+  width: auto;
+}
+
 .favorite-button {
-  height: 40px;
+  background-color: rgb(196, 36, 36) !important;
+  color: white !important;
+  border-color: white !important;
+  height: 45px;
   text-transform: uppercase;
   margin-top: 30px;
   width: auto;
@@ -287,4 +296,9 @@ form .rating {
   top: 80%;
   right: -85%;
   cursor: pointer;
+}
+
+.favorite-count {
+  margin: 10px 50px;
+  color: gray;
 }
