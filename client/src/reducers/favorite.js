@@ -7,10 +7,9 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case ADD_FAVORITE:
-      return [payload, ...state];
-
+      return [...state, payload];
     case REMOVE_FAVORITE:
-      return state.filter((prop) => prop.id !== payload.id);
+      return state.filter((id) => id !== payload);
 
     default:
       return state;

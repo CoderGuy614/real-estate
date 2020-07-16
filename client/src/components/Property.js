@@ -60,7 +60,7 @@ class Property extends React.Component {
                 <i className="fas fa-map-marker-alt"></i>
                 <span>{property.Address}</span>
               </small>
-              <Favorite property={property} />
+              <Favorite id={property.id} />
               <div className="user">
                 <div
                   className="avatar"

@@ -14,7 +14,7 @@ const Thumbnail = ({ property, houseHover }) => {
           backgroundImage: `url('${process.env.REACT_APP_API}${property.Photos[0].url}')`,
         }}
       >
-        <Favorite property={property} isThumbnail={true} />
+        <Favorite id={property.id} isThumbnail={true} />
       </div>
 
       <div className="content">

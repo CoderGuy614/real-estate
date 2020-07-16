@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Heart, HeartFill } from "react-bootstrap-icons";
+import { HeartFill } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { addFavorite, removeFavorite } from "../actions/favorite";
 
 const Favorite = ({
   favorites,
-  property,
+  id,
   addFavorite,
   removeFavorite,
   isThumbnail,
@@ -16,18 +16,12 @@ const Favorite = ({
   }
 
   return (
-    <span
-      className={`${isThumbnail ? "heart-thumbnail" : "favorite"}`}
-      //   onClick={(e) => {
-      //     e.stopPropagation();
-      //     toggleFavorite(property);
-      //   }}
-    >
-      {favorites.includes(property) ? (
+    <span className={`${isThumbnail ? "heart-thumbnail" : "favorite"}`}>
+      {favorites.includes(id) ? (
         <HeartFill
           onClick={(e) => {
             e.preventDefault();
-            toggleFavorite(property);
+            toggleFavorite(id);
           }}
           color="red"
           size={25}
@@ -36,7 +30,7 @@ const Favorite = ({
         <HeartFill
           onClick={(e) => {
             e.preventDefault();
-            toggleFavorite(property);
+            toggleFavorite(id);
           }}
           color={isThumbnail ? "white" : "gray"}
           size={25}
@@ -50,7 +44,7 @@ Favorite.propTypes = {
   addFavorite: PropTypes.func.isRequired,
   removeFavorite: PropTypes.func.isRequired,
   favorites: PropTypes.array.isRequired,
-  property: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
