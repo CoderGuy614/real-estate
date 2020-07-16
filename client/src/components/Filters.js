@@ -3,7 +3,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 
+import { connect } from "react-redux";
+import { toggleShowFavorites } from "../actions/favorite";
+
 const Filters = ({
+  showFavorites,
+  toggleShowFavorites,
   categories,
   maxPrice,
   typeSelect,
@@ -75,6 +80,17 @@ const Filters = ({
     </Button>
   );
 
+  const favoriteButton = () => (
+    <Button
+      className="favorite-button"
+      onClick={toggleShowFavorites}
+      variant="primary"
+    >
+      {" "}
+      SHOW FAVORITES
+    </Button>
+  );
+
   return (
     <Form className="filter-form">
       <Form.Row>
@@ -82,9 +98,15 @@ const Filters = ({
         <Col className="filter">{categoryFilters()}</Col>
         <Col className="filter">{maxPriceFilters()}</Col>
         <Col>{filterButton()}</Col>
+        <Col>{favoriteButton()}</Col>
       </Form.Row>
     </Form>
   );
 };
 
-export default Filters;
+const mapStateToProps = (state) => ({
+  showFavorites: state.favoriteReducer.showFavorites,
+  favorites: state.favoriteReducer.favorites,
+});
+
+export default connect(mapStateToProps, { toggleShowFavorites })(Filters);

@@ -1,9 +1,12 @@
 import React from "react";
 import GoogleMap from "google-map-react";
+import Button from "react-bootstrap/Button";
 import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
 import Filters from "./Filters";
 import { getProperties, getCategories } from "./apiCore";
+
+import { connect } from "react-redux";
 
 import "../styles/cards.css";
 import "../styles/grid.css";
@@ -45,6 +48,23 @@ class Houses extends React.Component {
       });
     });
   };
+
+  componentWillReceiveProps({
+    favorites: { favorites },
+    showFavorites: { showFavorites },
+  }) {
+    if (showFavorites) {
+      this.setState({
+        properties: this.state.originalProperties.filter((prop) =>
+          favorites.includes(prop.id)
+        ),
+      });
+    } else {
+      this.setState({
+        properties: this.state.originalProperties,
+      });
+    }
+  }
 
   filter = () => {
     const { filterValues, originalProperties } = this.state;
@@ -136,4 +156,9 @@ class Houses extends React.Component {
   }
 }
 
-export default Houses;
+const mapStateToProps = (state) => ({
+  favorites: state.favoriteReducer,
+  showFavorites: state.favoriteReducer,
+});
+
+export default connect(mapStateToProps)(Houses);
