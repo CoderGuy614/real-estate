@@ -3,6 +3,10 @@ import PhotoModal from "../PhotoModal";
 import ImageMain from "./ImageMain";
 import Previews from "./Previews";
 
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+
 const Gallery = ({ photos }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,38 +19,27 @@ const Gallery = ({ photos }) => {
   };
 
   return (
-    <div className="gallery">
-      {photos ? (
-        <>
-          <div
-            onClick={handleOpen}
-            className="image-main"
-            style={{
-              backgroundImage: `url('${process.env.REACT_APP_API}${photos[0].url}')`,
-            }}
-          ></div>
-          <div className="previews">
-            {photos &&
-              photos.map((image, i) => (
-                <div
-                  className="preview"
-                  onClick={() => handleOpen()}
-                  key={i}
-                  style={{
-                    backgroundImage: `url('${process.env.REACT_APP_API}${image.url}')`,
-                  }}
-                ></div>
-              ))}
-          </div>
-          <PhotoModal
-            photos={photos}
-            isOpen={isOpen}
-            handleClose={handleClose}
-            handleOpen={handleOpen}
-          />
-        </>
-      ) : null}
-    </div>
+    <Container fluid className="gallery-container">
+      <Row>
+        {photos && (
+          <>
+            <Col xs={12} md={6}>
+              <ImageMain handleOpen={handleOpen} photos={photos} />
+            </Col>
+            <Col xs={12} md={6} className="d-none d-md-block">
+              <Previews handleOpen={handleOpen} photos={photos} />
+            </Col>
+
+            <PhotoModal
+              photos={photos}
+              isOpen={isOpen}
+              handleClose={handleClose}
+              handleOpen={handleOpen}
+            />
+          </>
+        )}
+      </Row>
+    </Container>
   );
 };
 

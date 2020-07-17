@@ -5,6 +5,8 @@ import Pin from "./Pin";
 import Filters from "./Filters";
 import { getProperties, getCategories } from "./apiCore";
 
+import { Grid, Row, Col, Container } from "react-bootstrap";
+
 import { connect } from "react-redux";
 
 import "../styles/cards.css";
@@ -84,27 +86,33 @@ const Houses = ({
   };
 
   return (
-    <>
-      <Filters
-        categories={categories}
-        properties={properties}
-        maxPrice={maxPrice}
-        typeSelect={typeSelect}
-        bedroomSelect={bedroomSelect}
-        filter={filter}
-      />
+    <Container fluid className="fixed">
+      <Row>
+        <Filters
+          categories={categories}
+          properties={properties}
+          maxPrice={maxPrice}
+          typeSelect={typeSelect}
+          bedroomSelect={bedroomSelect}
+          filter={filter}
+        />
+      </Row>
+      <Row>
+        <Col xs={12} md={8}>
+          <div className="grid-container">
+            <div className="grid-item">
+              {properties.map((property, index) => (
+                <Thumbnail
+                  property={property}
+                  key={index}
+                  houseHover={houseHover}
+                />
+              ))}
+            </div>
+          </div>
+        </Col>
 
-      <div className="grid map">
-        <div className="grid four large">
-          {properties.map((property, index) => (
-            <Thumbnail
-              property={property}
-              key={index}
-              houseHover={houseHover}
-            />
-          ))}
-        </div>
-        <div className="map">
+        <Col xs={12} md={4} className="map-container">
           <GoogleMap
             bootstrapURLKeys={map.key}
             center={map.center}
@@ -120,9 +128,9 @@ const Houses = ({
               />
             ))}
           </GoogleMap>
-        </div>
-      </div>
-    </>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

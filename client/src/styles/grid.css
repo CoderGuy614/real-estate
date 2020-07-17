@@ -80,3 +80,24 @@ ul.grid.two {
 .reviews {
   margin-top: 40px;
 }
+
+.grid-container {
+  height: 100vh;
+  display: grid;
+  overflow-y: scroll;
+}
+
+.grid-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+}
+
+@media (max-width: 500px) {
+  .grid-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 20px;
+  }
+}

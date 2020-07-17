@@ -4,12 +4,6 @@
   overflow-y: hidden;
 }
 
-.map-grid {
-  display: grid;
-  width: 100%;
-  height: 90vh;
-}
-
 .pin {
   width: 100px;
   height: 64px;
@@ -35,4 +29,10 @@
   background: #00988f;
   color: white;
   font-weight: bold;
+}
+
+.map-container {
+  padding: 5px;
+  overflow-y: hidden;
+  height: 90vh;
 }

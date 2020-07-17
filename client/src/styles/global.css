@@ -305,3 +305,13 @@ form .rating {
 .intro {
   margin-top: 15px;
 }
+
+.fixed {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.scroll {
+  height: 100vh;
+  overflow-y: scroll;
+}

@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import Gallery2 from "../gallery/Gallery2";
+import Gallery from "../gallery/Gallery";
 import Favorite from "../Favorite";
 import Realtor from "../Realtor";
 import Specs from "./Specs";
@@ -39,7 +39,7 @@ const Property = (props) => {
 
   return (
     <>
-      <Gallery2 photos={property.Photos} />
+      <Gallery photos={property.Photos} />
       <Container fluid>
         <Row>
           <Col xs={12} md={8}>
