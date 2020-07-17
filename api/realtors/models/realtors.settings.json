@@ -11,6 +11,15 @@
   "attributes": {
     "Name": {
       "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "company": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
     }
   }
 }
