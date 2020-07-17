@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { getProperty } from "./apiCore";
+
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 import Gallery from "./Gallery";
 import Favorite from "./Favorite";
-
 import Realtor from "./Realtor";
 import Specs from "./property/Specs";
 import Description from "./property/Description";
 import Amenities from "./property/Amenities";
 import Intro from "./property/Intro";
 import Sidebar from "./property/Sidebar";
-// import { connect } from "react-redux";
 
 import "../styles/cards.css";
 import "../styles/grid.css";
@@ -36,22 +39,26 @@ const Property = (props) => {
 
   return (
     <>
-      <Gallery photos={property.Photos} />
-      <div className="grid medium">
-        <div className="grid sidebar">
-          <div className="content">
-            <Intro title={property.Title} address={property.Address} />
-            <Favorite id={property.id} />
-            <Realtor realtor={property.realtor} />
+      <Container fluid>
+        <Gallery photos={property.Photos} />
+      </Container>
+      <Container fluid>
+        <Row>
+          <Col xs={12} md={8}>
+            <Container className="intro">
+              <Intro title={property.Title} address={property.Address} />
+              <Favorite id={property.id} />
+              <Realtor realtor={property.realtor} />
+            </Container>
             <Description description={property.Description} />
             <Specs property={property} />
             <Amenities property={property} />
-            <div className="grid sidebar-right">
-              <Sidebar property={property} map={map} />
-            </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+          <Col xs={12} md={4}>
+            <Sidebar property={property} map={map} />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

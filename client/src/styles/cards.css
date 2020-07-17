@@ -1,6 +1,7 @@
 .card {
   border: 1px solid #e2e2e2;
   border-radius: 6px;
+  margin: 15px 0px;
 }
 
 a.card {

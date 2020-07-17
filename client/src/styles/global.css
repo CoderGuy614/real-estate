@@ -32,10 +32,10 @@ h1 {
   text-transform: uppercase;
 }
 
-.content {
-  margin: 50px 0;
+/* .content {
+  margin: 50px 15px;
   position: relative;
-}
+} */
 
 input[type="text"],
 select,
@@ -305,4 +305,8 @@ form .rating {
 
 .address {
   margin-left: 15px;
+}
+
+.intro {
+  margin-top: 15px;
 }
