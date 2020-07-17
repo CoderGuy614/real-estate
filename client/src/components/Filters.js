@@ -28,8 +28,8 @@ const Filters = ({
         >
           {[...Array(6)].map((choice, i) => {
             return (
-              <option key={i} value={i + 1}>
-                Min Bedrooms: {i + 1}{" "}
+              <option key={i} value={i}>
+                Min Bedrooms: {i}{" "}
               </option>
             );
           })}

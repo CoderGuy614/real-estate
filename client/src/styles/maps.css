@@ -1,6 +1,13 @@
 .map {
   width: 100%;
   height: 90vh;
+  overflow-y: hidden;
+}
+
+.map-grid {
+  display: grid;
+  width: 100%;
+  height: 90vh;
 }
 
 .pin {
