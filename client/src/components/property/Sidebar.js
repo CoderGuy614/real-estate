@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMap from "google-map-react";
+import { Link } from "react-router-dom";
 import Pin from "../Pin";
 
 const Sidebar = ({ property, map }) => {
@@ -8,7 +9,10 @@ const Sidebar = ({ property, map }) => {
       <div className="card shadow">
         <span className="asking-price">Asking Price:</span>
         <div className="content large">
-          <h3>${Number(property.Price).toLocaleString()}</h3>
+          <h3>
+            <em>${Number(property.Price).toLocaleString()}</em>
+          </h3>
+          <Link to="/payments">Calculate Payment</Link>
         </div>
         <i className="fa fa-heart-o" aria-hidden="true"></i>
       </div>

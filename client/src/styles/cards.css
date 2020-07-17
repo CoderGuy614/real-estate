@@ -33,11 +33,21 @@ a.card {
   display: flex;
   border: none;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+.asking-price {
+  font-size: x-large;
+  color: darkslategray;
 }
 
-.asking-price {
-  justify-content: center;
-  font-size: x-large;
+.content.large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content.large > h3 {
+  color: darkslategray;
 }
 
 .card.link {

@@ -19,19 +19,26 @@ const Gallery2 = ({ photos }) => {
   };
 
   return (
-    <Container fluid className="gallery">
-      {photos && (
-        <>
-          <ImageMain handleOpen={handleOpen} photos={photos} />
-          <Previews handleOpen={handleOpen} photos={photos} />
-          <PhotoModal
-            photos={photos}
-            isOpen={isOpen}
-            handleClose={handleClose}
-            handleOpen={handleOpen}
-          />
-        </>
-      )}
+    <Container fluid className="gallery-container">
+      <Row>
+        {photos && (
+          <>
+            <Col xs={12} md={6}>
+              <ImageMain handleOpen={handleOpen} photos={photos} />
+            </Col>
+            <Col xs={12} md={6} className="d-none d-md-block">
+              <Previews handleOpen={handleOpen} photos={photos} />
+            </Col>
+
+            <PhotoModal
+              photos={photos}
+              isOpen={isOpen}
+              handleClose={handleClose}
+              handleOpen={handleOpen}
+            />
+          </>
+        )}
+      </Row>
     </Container>
   );
 };

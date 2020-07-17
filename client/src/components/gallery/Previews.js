@@ -2,11 +2,11 @@ import React from "react";
 
 const Previews = ({ photos, handleOpen }) => {
   return (
-    <div className="previews">
+    <div className="gallery-preview">
       {photos &&
         photos.map((image, i) => (
           <div
-            className="preview"
+            className="gallery-preview-image"
             onClick={() => handleOpen()}
             key={i}
             style={{

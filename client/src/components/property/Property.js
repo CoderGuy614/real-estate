@@ -39,9 +39,7 @@ const Property = (props) => {
 
   return (
     <>
-      <Container fluid>
-        <Gallery2 photos={property.Photos} />
-      </Container>
+      <Gallery2 photos={property.Photos} />
       <Container fluid>
         <Row>
           <Col xs={12} md={8}>
