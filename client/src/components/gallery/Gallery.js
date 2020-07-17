@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import PhotoModal from "./PhotoModal";
+import PhotoModal from "../PhotoModal";
+import ImageMain from "./ImageMain";
+import Previews from "./Previews";
 
 const Gallery = ({ photos }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +19,7 @@ const Gallery = ({ photos }) => {
       {photos ? (
         <>
           <div
+            onClick={handleOpen}
             className="image-main"
             style={{
               backgroundImage: `url('${process.env.REACT_APP_API}${photos[0].url}')`,
@@ -34,13 +37,13 @@ const Gallery = ({ photos }) => {
                   }}
                 ></div>
               ))}
-            <PhotoModal
-              photos={photos}
-              isOpen={isOpen}
-              handleClose={handleClose}
-              handleOpen={handleOpen}
-            />
           </div>
+          <PhotoModal
+            photos={photos}
+            isOpen={isOpen}
+            handleClose={handleClose}
+            handleOpen={handleOpen}
+          />
         </>
       ) : null}
     </div>

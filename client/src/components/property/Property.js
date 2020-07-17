@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { getProperty } from "./apiCore";
+import { getProperty } from "../apiCore";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import Gallery from "./Gallery";
-import Favorite from "./Favorite";
-import Realtor from "./Realtor";
-import Specs from "./property/Specs";
-import Description from "./property/Description";
-import Amenities from "./property/Amenities";
-import Intro from "./property/Intro";
-import Sidebar from "./property/Sidebar";
+import Gallery2 from "../gallery/Gallery2";
+import Favorite from "../Favorite";
+import Realtor from "../Realtor";
+import Specs from "./Specs";
+import Description from "./Description";
+import Amenities from "./Amenities";
+import Intro from "./Intro";
+import Sidebar from "./Sidebar";
 
-import "../styles/cards.css";
-import "../styles/grid.css";
-import "../styles/users.css";
-import "../styles/gallery.css";
+import "../../styles/cards.css";
+import "../../styles/grid.css";
+import "../../styles/users.css";
+import "../../styles/gallery.css";
 
 const Property = (props) => {
   const [property, setProperty] = useState({ category: {}, realtor: {} });
@@ -40,7 +40,7 @@ const Property = (props) => {
   return (
     <>
       <Container fluid>
-        <Gallery photos={property.Photos} />
+        <Gallery2 photos={property.Photos} />
       </Container>
       <Container fluid>
         <Row>

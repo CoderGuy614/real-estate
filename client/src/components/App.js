@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import Houses from "./Houses";
-import Property from "./Property";
+import Property from "./property/Property";
 import Contact from "./Contact";
 import Nav from "./Nav";
 
