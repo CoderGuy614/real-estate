@@ -9,23 +9,21 @@ import Nav from "./Nav";
 import { Provider } from "react-redux";
 import { store, persistor } from "../redux/store";
 
-class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <PersistGate persistor={persistor}>
-            <Nav />
-            <Switch>
-              <Route path="/property/:id" component={Property} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/" component={Houses} />
-            </Switch>
-          </PersistGate>
-        </BrowserRouter>
-      </Provider>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <PersistGate persistor={persistor}>
+          <Nav />
+          <Switch>
+            <Route path="/property/:id" component={Property} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/" component={Houses} />
+          </Switch>
+        </PersistGate>
+      </BrowserRouter>
+    </Provider>
+  );
+};
 
 export default App;

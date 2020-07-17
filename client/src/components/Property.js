@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getProperty, getAmenities } from "./apiCore";
+import { getProperty } from "./apiCore";
 import Gallery from "./Gallery";
-
-import GoogleMap from "google-map-react";
 import Favorite from "./Favorite";
-import Pin from "./Pin";
 
+import Realtor from "./Realtor";
+import Specs from "./property/Specs";
+import Description from "./property/Description";
+import Amenities from "./property/Amenities";
+import Intro from "./property/Intro";
+import Sidebar from "./property/Sidebar";
 // import { connect } from "react-redux";
 
 import "../styles/cards.css";
@@ -35,77 +38,16 @@ const Property = (props) => {
     <>
       <Gallery photos={property.Photos} />
       <div className="grid medium">
-        <div className="grid sidebar-right">
+        <div className="grid sidebar">
           <div className="content">
-            <h1>{property.title}</h1>
-            <small>
-              <i className="fas fa-map-marker-alt"></i>
-              <span>{property.Address}</span>
-            </small>
+            <Intro title={property.Title} address={property.Address} />
             <Favorite id={property.id} />
-            <div className="user">
-              <div
-                className="avatar"
-                style={{
-                  backgroundImage: `url('https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png')`,
-                }}
-              ></div>
-              <div className="name">
-                <small>Listed by: {property.realtor.Name}</small>
-              </div>
-            </div>
-            <div className="card specs">
-              <div className="content">
-                <ul className="grid two">
-                  <li>
-                    <i className="fas fa-fw fa-home"></i>
-                    {property.category.name}
-                  </li>
-
-                  <li>
-                    <i className="fas fa-fw fa-bed"></i>
-                    {property.Bedrooms} bedrooms
-                  </li>
-                  <li>
-                    <i className="fas fa-fw fa-bath"></i>
-                    {property.Bathrooms} bathrooms
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <p>{property.description}</p>
-            <h3>Amenities</h3>
-            <div className="card specs">
-              <div className="content">
-                <ul className="grid two">
-                  {getAmenities(property).map((a, i) => {
-                    return <li key={i}>{a}</li>;
-                  })}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="sidebar">
-            <div className="card shadow">
-              <span className="asking-price">Asking Price:</span>
-              <div className="content large">
-                <h3>${Number(property.Price).toLocaleString()}</h3>
-              </div>
-              <i className="fa fa-heart-o" aria-hidden="true"></i>
-            </div>
-            <div className="detail-map">
-              <GoogleMap
-                bootstrapURLKeys={map.key}
-                center={map.center}
-                zoom={map.zoom}
-              >
-                <Pin
-                  property={property}
-                  lat={property.lat}
-                  lng={property.lng}
-                  key={property.id}
-                />
-              </GoogleMap>
+            <Realtor realtor={property.realtor} />
+            <Description description={property.Description} />
+            <Specs property={property} />
+            <Amenities property={property} />
+            <div className="grid sidebar-right">
+              <Sidebar property={property} map={map} />
             </div>
           </div>
         </div>
