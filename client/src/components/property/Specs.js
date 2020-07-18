@@ -20,8 +20,8 @@ const Specs = ({ property }) => {
             {property.Bathrooms} bathrooms
           </li>
           <li>
-            <i class="fas fa-check-circle"></i>
-            {property.status}
+            <i class="fas fa-ruler"></i>
+            {property.SquareFeet} Sq.Ft.
           </li>
         </ul>
       </div>

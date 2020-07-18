@@ -13,6 +13,7 @@ import Description from "./Description";
 import Amenities from "./Amenities";
 import Intro from "./Intro";
 import Sidebar from "./Sidebar";
+import AlertComponent from "../Alert";
 
 import "../../styles/cards.css";
 import "../../styles/grid.css";
@@ -45,9 +46,11 @@ const Property = (props) => {
           <Col xs={12} md={8}>
             <Container className="intro">
               <Intro title={property.Title} address={property.Address} />
+
               <Favorite id={property.id} />
               <Realtor realtor={property.realtor} />
             </Container>
+            <AlertComponent />
             <Description description={property.Description} />
             <Specs property={property} />
             <Amenities amenities={property.amenities} />
