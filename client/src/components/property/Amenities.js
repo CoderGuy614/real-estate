@@ -1,15 +1,20 @@
 import React from "react";
-import { getAmenities } from "../apiCore";
 
-const Amenities = ({ property }) => {
+const Amenities = ({ amenities }) => {
   return (
     <div className="card specs">
       <div className="content">
+        <h5>Amenities</h5>
+
         <ul className="grid two">
-          <h5>Amenities</h5>
-          {getAmenities(property).map((a, i) => {
-            return <li key={i}>{a}</li>;
-          })}
+          {amenities
+            ? amenities.amenities.map((a, i) => (
+                <li key={i}>
+                  <i class="fas fa-circle"></i>
+                  {a}
+                </li>
+              ))
+            : null}
         </ul>
       </div>
     </div>

@@ -19,6 +19,10 @@ const Specs = ({ property }) => {
             <i className="fas fa-fw fa-bath"></i>
             {property.Bathrooms} bathrooms
           </li>
+          <li>
+            <i class="fas fa-check-circle"></i>
+            {property.status}
+          </li>
         </ul>
       </div>
     </div>

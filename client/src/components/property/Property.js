@@ -50,7 +50,7 @@ const Property = (props) => {
             </Container>
             <Description description={property.Description} />
             <Specs property={property} />
-            <Amenities property={property} />
+            <Amenities amenities={property.amenities} />
           </Col>
           <Col xs={12} md={4}>
             <Sidebar property={property} map={map} />
