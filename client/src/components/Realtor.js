@@ -11,6 +11,15 @@ const Realtor = ({ realtor }) => {
       ></div>
       <div className="name">
         <small>Listed by: {realtor.Name}</small>
+        <small>
+          <i class="fas fa-sign"></i> {realtor.company}
+        </small>
+        <small>
+          <i class="fas fa-envelope-square"></i> {realtor.email}
+        </small>
+        <small>
+          <i class="fas fa-phone-square-alt"></i> {realtor.phone}
+        </small>
       </div>
     </div>
   );
