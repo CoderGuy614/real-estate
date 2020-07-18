@@ -3,6 +3,7 @@ import GoogleMap from "google-map-react";
 import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
 import Filters from "./Filters";
+import AlertComponent from "./Alert";
 import { getProperties, getCategories } from "./apiCore";
 
 import { Row, Col, Container } from "react-bootstrap";
@@ -97,8 +98,10 @@ const Houses = ({
           filter={filter}
         />
       </Row>
+
       <Row>
         <Col xs={12} md={8}>
+          <AlertComponent />
           <div className="grid-container">
             <div className="grid-item">
               {properties.map((property, index) => (

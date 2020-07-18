@@ -7,7 +7,7 @@ export const addFavorite = (property) => (dispatch) => {
     type: ADD_FAVORITE,
     payload: property,
   });
-  dispatch(setAlert("Added to Favorites", "set-alert"));
+  dispatch(setAlert("Added to Favorites", "success"));
 };
 // Remove Favorite
 export const removeFavorite = (property) => (dispatch) => {
@@ -15,7 +15,6 @@ export const removeFavorite = (property) => (dispatch) => {
     type: REMOVE_FAVORITE,
     payload: property,
   });
-  dispatch(setAlert("Removed from Favorites", "remove-alert"));
 };
 
 // Show Favorites

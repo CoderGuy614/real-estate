@@ -5,7 +5,6 @@ import Houses from "./Houses";
 import Property from "./property/Property";
 import Contact from "./Contact";
 import Nav from "./Nav";
-import Alert from "./Alert";
 
 import { Provider } from "react-redux";
 import { store, persistor } from "../redux/store";
@@ -16,7 +15,7 @@ const App = () => {
       <BrowserRouter>
         <PersistGate persistor={persistor}>
           <Nav />
-          <Alert />
+
           <Switch>
             <Route path="/property/:id" component={Property} />
             <Route path="/contact" component={Contact} />
