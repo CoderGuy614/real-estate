@@ -117,7 +117,7 @@ a.card {
 
 .card .content .price,
 .card .content .rating {
-  font-size: 13px;
+  font-size: 22px;
   color: #5e5e5e;
   display: block;
 }

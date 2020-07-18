@@ -6,6 +6,7 @@
     "axios": "^0.19.0",
     "bootstrap": "^4.5.0",
     "google-map-react": "^1.1.4",
+    "moment": "^2.27.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.2.2",
     "react-bootstrap-icons": "^1.0.3-alpha5",

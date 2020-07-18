@@ -5,7 +5,7 @@ import Pin from "./Pin";
 import Filters from "./Filters";
 import { getProperties, getCategories } from "./apiCore";
 
-import { Grid, Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 
 import { connect } from "react-redux";
 

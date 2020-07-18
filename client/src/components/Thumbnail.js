@@ -1,5 +1,6 @@
 import React from "react";
 import Favorite from "./Favorite";
+import moment from "moment";
 
 const Thumbnail = ({ property, houseHover }) => {
   return (
@@ -27,7 +28,12 @@ const Thumbnail = ({ property, houseHover }) => {
           <i className="fas fa-map-marker-alt"></i>
           <span>{property.Address}</span>
         </small>
-        <span className="price">${property.Price}</span>
+        <span className="price">
+          ${Number(property.Price).toLocaleString()}
+        </span>
+        <span className="listed-date">
+          Listed: {moment(property.created_at).fromNow()}
+        </span>
       </div>
     </a>
   );

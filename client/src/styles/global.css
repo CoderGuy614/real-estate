@@ -315,3 +315,15 @@ form .rating {
   height: 100vh;
   overflow-y: scroll;
 }
+
+.listed-date {
+  font-size: 12px;
+
+  color: #4f4f4f;
+}
+
+.footer {
+  height: 50px;
+  width: 100%;
+  background-color: lightblue;
+}
