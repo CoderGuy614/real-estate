@@ -94,33 +94,30 @@ ul.grid.two {
   grid-row-gap: 30px;
 }
 
-.contact {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-column-gap: 20px;
+.contact-container {
   padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  background-color: white;
+  color: #444;
 }
 
-.contact-info {
-  display: grid;
-  height: 500px;
-  width: 100%;
-  grid-template-rows: 2fr 1fr;
-  grid-row-gap: 25px;
+.contact-item {
   border: 1px solid black;
-  justify-content: center;
+  padding: 25px;
+  border-radius: 5px;
+  background-color: gray;
 }
 
-.realtor-info {
-  display: grid;
-  height: 500px;
-  border: 1px solid black;
-  justify-content: center;
+.a {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
 }
-.contact-row {
-  display: grid;
-  border: 1px solid blue;
-  width: 100%;
+
+.b {
+  grid-column: 1 / 2;
+  grid-row: 2 / 4;
 }
 
 @media (max-width: 500px) {
