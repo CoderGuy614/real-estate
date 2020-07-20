@@ -12,6 +12,7 @@ const Filters = ({
   favorites: { favorites },
   showFavorites: { showFavorites },
   toggleShowFavorites,
+  toggleShowFilters,
   categories,
   maxPrice,
   typeSelect,
@@ -118,6 +119,10 @@ const Filters = ({
     </>
   );
 
+  const hideButton = () => (
+    <Button onClick={() => toggleShowFilters()}> X </Button>
+  );
+
   const mobileFilters = () => (
     <>
       <Col xs={1}></Col>
@@ -130,6 +135,7 @@ const Filters = ({
       <Col xs={2}>
         <Row>{filterButton()}</Row>
         <Row>{favoriteButton()}</Row>
+        <Row>{hideButton()}</Row>
       </Col>
     </>
   );
@@ -148,6 +154,7 @@ const Filters = ({
       <Col sm={3}>
         {filterButton()}
         {favoriteButton()}
+        {hideButton()}
       </Col>
     </>
   );

@@ -6,7 +6,7 @@ import Filters from "./Filters";
 import AlertComponent from "./Alert";
 import { getProperties, getCategories } from "./apiCore";
 
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 
 import { connect } from "react-redux";
 
@@ -31,6 +31,7 @@ const Houses = ({
     category: null,
     maxPrice: 1000000000,
   });
+  const [showFilters, setShowFilters] = useState(true);
 
   useEffect(() => {
     getCategories().then((cat) => {
@@ -50,6 +51,10 @@ const Houses = ({
       : setProperties(originalProperties);
     //eslint-disable-next-line
   }, [showFavorites, favorites]);
+
+  const toggleShowFilters = () => {
+    setShowFilters(!showFilters);
+  };
 
   const houseHover = (id) => {
     let houses = properties.map((h) => {
@@ -89,14 +94,21 @@ const Houses = ({
   return (
     <Container fluid className="fixed">
       <Row>
-        <Filters
-          categories={categories}
-          properties={properties}
-          maxPrice={maxPrice}
-          typeSelect={typeSelect}
-          bedroomSelect={bedroomSelect}
-          filter={filter}
-        />
+        {showFilters ? (
+          <Filters
+            categories={categories}
+            properties={properties}
+            maxPrice={maxPrice}
+            typeSelect={typeSelect}
+            bedroomSelect={bedroomSelect}
+            filter={filter}
+            toggleShowFilters={toggleShowFilters}
+          />
+        ) : (
+          <Button onClick={() => toggleShowFilters()}>
+            Click TO Show Filters
+          </Button>
+        )}
       </Row>
 
       <Row>
