@@ -20,8 +20,11 @@ const Filters = ({
 }) => {
   const bedroomFilters = () => {
     return (
-      <>
-        {/* <Form.Label className="d-none d-sm-block">Bedrooms</Form.Label> */}
+      <Form.Group>
+        <Form.Label className="d-none d-md-block">
+          <i className="fas fa-bed fa-2x filter-icon"></i>
+        </Form.Label>
+
         <Form.Control
           disabled={showFavorites}
           as="select"
@@ -35,18 +38,22 @@ const Filters = ({
             );
           })}
         </Form.Control>
-      </>
+      </Form.Group>
     );
   };
 
   const categoryFilters = () => {
     return (
-      <>
-        {/* <Form.Label className="d-none d-sm-block">Type</Form.Label> */}
+      <Form.Group>
+        <Form.Label className="d-none d-md-block">
+          <i className="fas fa-home fa-2x filter-icon"></i>
+        </Form.Label>
+
         <Form.Control
           disabled={showFavorites}
           as="select"
           onChange={typeSelect}
+          className="d-flex"
         >
           <option value="all">All Types</option>
           {categories.map((category, i) => {
@@ -57,14 +64,16 @@ const Filters = ({
             );
           })}
         </Form.Control>
-      </>
+      </Form.Group>
     );
   };
 
   const maxPriceFilters = () => {
     return (
-      <>
-        {/* <Form.Label className="d-none d-sm-block">Price</Form.Label> */}
+      <Form.Group>
+        <Form.Label className="d-none d-md-block">
+          <i className="fas fa-dollar-sign fa-2x filter-icon"></i>
+        </Form.Label>
         <Form.Control disabled={showFavorites} as="select" onChange={maxPrice}>
           <option value={1000000000}>Max. Price</option>
           <option value={1000000000}>$1,000,000+</option>
@@ -81,7 +90,7 @@ const Filters = ({
           <option value={75000}>$75,000</option>
           <option value={50000}>Less than $50,000</option>
         </Form.Control>
-      </>
+      </Form.Group>
     );
   };
 
@@ -111,13 +120,14 @@ const Filters = ({
 
   const mobileFilters = () => (
     <>
+      <Col xs={1}></Col>
       <Col xs={8}>
         {bedroomFilters()}
         {categoryFilters()}
         {maxPriceFilters()}
       </Col>
       <Col xs={1}></Col>
-      <Col xs={3}>
+      <Col xs={2}>
         <Row>{filterButton()}</Row>
         <Row>{favoriteButton()}</Row>
       </Col>
@@ -144,9 +154,9 @@ const Filters = ({
 
   return (
     <>
-      <Form className="filter-form">
+      <Form inline className="filter-form">
         <Form.Row className="d-xs-block d-sm-none">{mobileFilters()}</Form.Row>
-        <Form.Row className="d-sm-inline-flex d-none">
+        <Form.Row className="d-sm-inline-flex d-none filter-row-container">
           {largeFilters()}
         </Form.Row>
       </Form>

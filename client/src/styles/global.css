@@ -183,17 +183,19 @@ form textarea {
 }
 
 .filter-form {
-  display: flex;
-  justify-content: flex-start;
   width: 100%;
-  margin: 10px 10px 0px 20px;
-  padding: 10px 0px;
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
+  padding: 5px 0px;
 }
 
 .filter {
+  display: flex;
+  justify-content: space-evenly;
   width: auto;
+}
+.filter-icon {
+  margin-right: 15px;
 }
 
 label.checkbox input {
@@ -233,12 +235,6 @@ form .rating {
 
 /* filters */
 
-.filter-form {
-  padding: 10px 50px;
-  border-bottom: 1px solid #e2e2e2;
-  justify-content: space-between;
-}
-
 .form-row {
   width: 100%;
   display: flex;
@@ -256,8 +252,11 @@ form .rating {
   border-color: white !important;
   height: 45px;
   text-transform: uppercase;
-
   width: auto;
+}
+
+.filter-row-container {
+  justify-items: center;
 }
 
 .navbar-brand {
