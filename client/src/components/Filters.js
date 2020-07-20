@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 import { connect } from "react-redux";
 import { toggleShowFavorites } from "../actions/favorite";
@@ -20,7 +21,7 @@ const Filters = ({
   const bedroomFilters = () => {
     return (
       <>
-        <Form.Label className="d-none d-sm-block">Bedrooms</Form.Label>
+        {/* <Form.Label className="d-none d-sm-block">Bedrooms</Form.Label> */}
         <Form.Control
           disabled={showFavorites}
           as="select"
@@ -41,7 +42,7 @@ const Filters = ({
   const categoryFilters = () => {
     return (
       <>
-        <Form.Label className="d-none d-sm-block">Type</Form.Label>
+        {/* <Form.Label className="d-none d-sm-block">Type</Form.Label> */}
         <Form.Control
           disabled={showFavorites}
           as="select"
@@ -63,7 +64,7 @@ const Filters = ({
   const maxPriceFilters = () => {
     return (
       <>
-        <Form.Label className="d-none d-sm-block">Price</Form.Label>
+        {/* <Form.Label className="d-none d-sm-block">Price</Form.Label> */}
         <Form.Control disabled={showFavorites} as="select" onChange={maxPrice}>
           <option value={1000000000}>Max. Price</option>
           <option value={1000000000}>$1,000,000+</option>
@@ -108,25 +109,45 @@ const Filters = ({
     </>
   );
 
+  const mobileFilters = () => (
+    <>
+      <Col xs={8}>
+        {bedroomFilters()}
+        {categoryFilters()}
+        {maxPriceFilters()}
+      </Col>
+      <Col xs={1}></Col>
+      <Col xs={3}>
+        <Row>{filterButton()}</Row>
+        <Row>{favoriteButton()}</Row>
+      </Col>
+    </>
+  );
+
+  const largeFilters = () => (
+    <>
+      <Col sm={3} className="filter">
+        {bedroomFilters()}
+      </Col>
+      <Col sm={3} className="filter">
+        {categoryFilters()}
+      </Col>
+      <Col sm={3} className="filter">
+        {maxPriceFilters()}
+      </Col>
+      <Col sm={3}>
+        {filterButton()}
+        {favoriteButton()}
+      </Col>
+    </>
+  );
+
   return (
     <>
       <Form className="filter-form">
-        <Form.Row>
-          <Col xs={12} sm={3} className="filter">
-            {bedroomFilters()}
-          </Col>
-          <Col xs={12} sm={3} className="filter">
-            {categoryFilters()}
-          </Col>
-          <Col xs={12} sm={3} className="filter">
-            {maxPriceFilters()}
-          </Col>
-          <Col xs={6} sm={2}>
-            {filterButton()}
-          </Col>
-          <Col xs={6} sm={1}>
-            {favoriteButton()}
-          </Col>
+        <Form.Row className="d-xs-block d-sm-none">{mobileFilters()}</Form.Row>
+        <Form.Row className="d-sm-inline-flex d-none">
+          {largeFilters()}
         </Form.Row>
       </Form>
       {showFavorites && (

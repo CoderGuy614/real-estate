@@ -184,7 +184,7 @@ form textarea {
 
 .filter-form {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   margin: 10px 10px 0px 20px;
   padding: 10px 0px;
@@ -247,7 +247,6 @@ form .rating {
 .filter-button {
   height: 45px;
   text-transform: uppercase;
-  margin-top: 30px;
   width: auto;
 }
 
@@ -257,7 +256,7 @@ form .rating {
   border-color: white !important;
   height: 45px;
   text-transform: uppercase;
-  margin-top: 30px;
+
   width: auto;
 }
 
