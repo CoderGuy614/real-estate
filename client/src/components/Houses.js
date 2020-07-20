@@ -56,6 +56,13 @@ const Houses = ({
     setShowFilters(!showFilters);
   };
 
+  const showFiltersButton = () => (
+    <div onClick={() => toggleShowFilters()} className="show-filters-button">
+      <i class="fas fa-filter fa-2x"></i>
+      <span>Show Filters</span>
+    </div>
+  );
+
   const houseHover = (id) => {
     let houses = properties.map((h) => {
       h.selected = false;
@@ -105,9 +112,7 @@ const Houses = ({
             toggleShowFilters={toggleShowFilters}
           />
         ) : (
-          <Button onClick={() => toggleShowFilters()}>
-            Click TO Show Filters
-          </Button>
+          showFiltersButton()
         )}
       </Row>
 

@@ -120,7 +120,14 @@ const Filters = ({
   );
 
   const hideButton = () => (
-    <Button onClick={() => toggleShowFilters()}> X </Button>
+    <button
+      onClick={() => toggleShowFilters()}
+      type="button"
+      className="close"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
   );
 
   const mobileFilters = () => (

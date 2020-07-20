@@ -241,9 +241,18 @@ form .rating {
 }
 
 .filter-button {
-  height: 45px;
+  height: 43px;
   text-transform: uppercase;
-  width: auto;
+  width: 75px;
+}
+
+.show-filters-button {
+  width: 200px;
+  font-family: monospace;
+  margin: 10px 10px 10px auto;
+  padding: 5px;
+  background-color: rgba(220, 220, 220, 0.45);
+  text-align: center;
 }
 
 .favorite-button {
@@ -252,7 +261,7 @@ form .rating {
   border-color: white !important;
   height: 45px;
   text-transform: uppercase;
-  width: auto;
+  width: 75px;
 }
 
 .filter-row-container {
