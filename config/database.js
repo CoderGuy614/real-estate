@@ -1,14 +1,15 @@
 module.exports = ({ env }) => ({
-  defaultConnection: 'default',
+  defaultConnection: "default",
   connections: {
     default: {
-      connector: 'bookshelf',
+      connector: "mongoose",
       settings: {
-        client: 'sqlite',
-        filename: env('DATABASE_FILENAME', '.tmp/data.db'),
+        client: "mongo",
+        uri:
+          "mongodb://jlutz110:Mongoloid99$@realestate-shard-00-00.8inu2.mongodb.net:27017,realestate-shard-00-01.8inu2.mongodb.net:27017,realestate-shard-00-02.8inu2.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-2yt6lj-shard-0&authSource=admin&retryWrites=true&w=majority",
       },
       options: {
-        useNullAsDefault: true,
+        ssl: true,
       },
     },
   },
