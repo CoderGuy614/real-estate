@@ -1,3 +1,7 @@
+* {
+  font-family: "Merriweather", serif;
+}
+
 html,
 body,
 p {
@@ -242,14 +246,13 @@ form .rating {
 
 .filter-button {
   height: 43px;
-  text-transform: uppercase;
+
   width: 75px;
 }
 
 .show-filters-button {
-  width: 200px;
-  font-family: monospace;
-  margin: 10px 10px 10px auto;
+  width: 100%;
+  margin: 10px;
   padding: 5px;
   background-color: rgba(220, 220, 220, 0.45);
   text-align: center;
@@ -268,8 +271,15 @@ form .rating {
   justify-items: center;
 }
 
+.navbar {
+  height: 75px;
+}
+
 .navbar-brand {
   float: left;
+}
+
+.navbar-text {
 }
 
 .contact-button {
@@ -333,4 +343,14 @@ form .rating {
   height: 50px;
   width: 100%;
   background-color: lightblue;
+}
+
+.social-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.social-icon {
+  margin: 0px 5px;
 }

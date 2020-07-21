@@ -12,7 +12,7 @@ const Sidebar = ({ property, map }) => {
           <h3>
             <em>${Number(property.Price).toLocaleString()}</em>
           </h3>
-          <Link to="/payments">Calculate Payment</Link>
+          <Link to="#">Calculate Payment</Link>
         </div>
         <i className="fa fa-heart-o" aria-hidden="true"></i>
       </div>
